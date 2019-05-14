@@ -1,0 +1,10 @@
+{
+  "name": "LINK_antavo",
+  "version": "19.5.3",
+  "description": "Antavo Commerce Cloud Cartridge",
+  "main": "index.js",
+  "scripts": {
+    "lint": "sgmf-scripts --lint js && sgmf-scripts --lint css"
+  },
+  "author": "Antavo Ltd."
+}
