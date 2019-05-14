@@ -3,7 +3,7 @@
  * @returns {Boolean}
  */
 function isStatusAccepted(statusCode) {
-	return statusCode >= 100 && statusCode < 400;	
+    return statusCode >= 100 && statusCode < 400;	
 }
 
 /**
@@ -11,11 +11,11 @@ function isStatusAccepted(statusCode) {
  * @returns {Object}
  */
 function parseJsonBody(result) {
-	try {
-		return JSON.parse(result);
-	} catch (e) {
-		return result;
-	}
+    try {
+        return JSON.parse(result);
+    } catch (e) {
+        return result;
+    }
 }
 
 /**
@@ -24,15 +24,15 @@ function parseJsonBody(result) {
  * @returns
  */
 function parseBody(body, contentType) {
-	if (typeof contentType !== 'string') {
-		return body;
-	}
+    if (typeof contentType !== 'string') {
+        return body;
+    }
 
-	switch (contentType.split(';')[0]) {
-		case 'application/json':
-			return parseJsonBody(body);
-		default:
-    		return body;
+    switch (contentType.split(';')[0]) {
+        case 'application/json':
+            return parseJsonBody(body);
+        default:
+            return body;
 	}
 }
 

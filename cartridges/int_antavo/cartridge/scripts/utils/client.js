@@ -9,35 +9,35 @@ var HttpService = ServiceRegistry.get('antavo.http');
  * @returns {Boolean}
  */
 function isAcceptableStatusCode(statusCode) {
-	return statusCode > 199 && statusCode < 300;
+    return statusCode > 199 && statusCode < 300;
 }
 
 /**
  * @returns {Object}
  */
 function getConfiguration() {
-	return HttpService.getConfiguration().getCredential();
+    return HttpService.getConfiguration().getCredential();
 }
 
 /**
  * @returns {String}
  */
 function getApiUrl() {
-	return "https://" + getConfiguration().getURL().replace(/^http(s)?:\/\//, '');
+    return "https://" + getConfiguration().getURL().replace(/^http(s)?:\/\//, '');
 }
 
 /**
  * @returns {String}
  */
 function getApiKey() {
-	return getConfiguration().getUser();
+    return getConfiguration().getUser();
 }
 
 /**
  * @returns {String}
  */
 function getApiSecret() {
-	return getConfiguration().getPassword();
+    return getConfiguration().getPassword();
 }
 
 /**
@@ -47,41 +47,41 @@ function getApiSecret() {
  * @returns
  */
 function send(method, uri, data) {
-	var httpClient = new dw.net.HTTPClient();
-	data = data || {};
-	data['api_key'] = getApiKey();
-	httpClient.open(
-		method, 
-		RequestHelper.prepareUrl(
-			getApiUrl() + "/" + uri.replace(/^\//, ''), 
-			!RequestHelper.isBodyAllowed(method) ? data : null
-		)
-	);
+    var httpClient = new dw.net.HTTPClient();
+    data = data || {};
+    data['api_key'] = getApiKey();
+    httpClient.open(
+        method, 
+        RequestHelper.prepareUrl(
+            getApiUrl() + "/" + uri.replace(/^\//, ''), 
+            !RequestHelper.isBodyAllowed(method) ? data : null
+        )
+    );
 	// Adding the default request headers
-	httpClient.setRequestHeader('Content-Type', 'application/json; charset="UTF-8"');
-	httpClient.setRequestHeader('User-Agent', 'SFCC Cartridge Client 19.5.2');
-	// TODO: [fekete_zsolt@2019-05-14] Signing the request
-	httpClient.setTimeout(3000);
-	// Performing the request
-	httpClient.send(RequestHelper.isBodyAllowed(method) ? JSON.stringify(data) : '');
+    httpClient.setRequestHeader('Content-Type', 'application/json; charset="UTF-8"');
+    httpClient.setRequestHeader('User-Agent', 'SFCC Cartridge Client 19.5.2');
+    // TODO: [fekete_zsolt@2019-05-14] Signing the request
+    httpClient.setTimeout(3000);
+    // Performing the request
+    httpClient.send(RequestHelper.isBodyAllowed(method) ? JSON.stringify(data) : '');
 
-	// If the response status code is not 2xx, return
-	if (!ResponseHelper.isStatusAccepted(httpClient.statusCode)) {
-		var response = ResponseHelper.parseBody(
-			httpClient.errorText,
-			httpClient.getResponseHeader('Content-Type')
-		);
-	    throw ExceptionHelper.createException(
-    		response.error.message, 
-    		httpClient.statusCode
-		);
-	}
+    // If the response status code is not 2xx, return
+    if (!ResponseHelper.isStatusAccepted(httpClient.statusCode)) {
+        var response = ResponseHelper.parseBody(
+            httpClient.errorText,
+            httpClient.getResponseHeader('Content-Type')
+        );
+        throw ExceptionHelper.createException(
+            response.error.message, 
+            httpClient.statusCode
+        );
+    }
 	
-	// Parsing the JSON response, then return
-	return ResponseHelper.parseBody(
-		httpClient.text, 
-		httpClient.getResponseHeader('Content-Type')
-	);
+    // Parsing the JSON response, then return
+    return ResponseHelper.parseBody(
+        httpClient.text, 
+        httpClient.getResponseHeader('Content-Type')
+    );
 }
 
 /**
@@ -89,10 +89,10 @@ function send(method, uri, data) {
  * @returns {Object}
  */
 function getCustomer(id) {
-	return send(
-		RequestHelper.METHOD_GET, 
-		'/customers/' + encodeURIComponent(id)
-	);
+    return send(
+        RequestHelper.METHOD_GET, 
+        '/customers/' + encodeURIComponent(id)
+    );
 }
 
 /**
@@ -102,11 +102,11 @@ function getCustomer(id) {
  * @returns {Object}
  */
 function sendEvent(customer, action, data) {
-	return send(RequestHelper.METHOD_POST, '/events', {
-		customer: customer,
-		action: action,
-		data: data
-	});
+    return send(RequestHelper.METHOD_POST, '/events', {
+        customer: customer,
+        action: action,
+        data: data
+    });
 }
 
 exports.getApiUrl = getApiUrl;

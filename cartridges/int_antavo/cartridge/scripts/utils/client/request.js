@@ -34,10 +34,10 @@ const _METHOD_PATCH = 'PATCH';
  * @returns {Boolean}
  */
 function isBodyAllowed(method) {
-	method = method.toUpperCase();
-	return _METHOD_POST == method 
-		|| _METHOD_PUT == method 
-		|| _METHOD_PATCH == method;
+    method = method.toUpperCase();
+    return _METHOD_POST == method 
+        || _METHOD_PUT == method 
+        || _METHOD_PATCH == method;
 }
 
 /**
@@ -46,18 +46,18 @@ function isBodyAllowed(method) {
  * @returns {String}
  */
 function prepareUrl(url, params) {
-	// If the params parameter is empty, there is no need to prepare anything
-	if (!params) {
-		return url;
-	}
+    // If the params parameter is empty, there is no need to prepare anything
+    if (!params) {
+        return url;
+    }
 	
-	// Creating the query string 
-	var query = Object.keys(params).map(function (k) {
-		return encodeURIComponent(k) + "=" + encodeURIComponent(params[k]);
-	}).join('&');
+    // Creating the query string 
+    var query = Object.keys(params).map(function (k) {
+        return encodeURIComponent(k) + "=" + encodeURIComponent(params[k]);
+    }).join('&');
 	
-	// Appending the created query string, then return
-	return url + (url.indexOf('?') === -1 ? '?' : '&') + query;
+    // Appending the created query string, then return
+    return url + (url.indexOf('?') === -1 ? '?' : '&') + query;
 }
 
 exports.METHOD_GET = _METHOD_GET;

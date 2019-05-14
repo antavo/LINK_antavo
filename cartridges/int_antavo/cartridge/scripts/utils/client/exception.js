@@ -5,11 +5,11 @@
  * @returns {Object}
  */
 function createException(message, code) {
-	return {
-		type: "AntavoException",
-		message: message,
-		code: code
-	};
+    return {
+        type: "AntavoException",
+        message: message,
+        code: code
+    };
 }
 
 exports.createException = createException;
