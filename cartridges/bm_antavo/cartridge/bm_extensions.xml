@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<extensions xmlns="http://www.demandware.com/xml/bmmodules/2007-12-11" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.demandware.com/xml/bmmodules/2007-12-11 bmext.xsd">
+	<menuitem id="antavo_extension_root" position="99999" site="false">
+		<name xml:lang="x-default">Antavo Loyalty</name>
+		<short_description xml:lang="x-default">
+			The Antavo Loyalty Integration makes it easy for SFCC developers to build Antavo-powered applications.
+  		</short_description>
+		<description xml:lang="x-default">
+			The Antavo Loyalty Integration makes it easy for SFCC developers to build Antavo-powered applications.
+  		</description>
+		<icon>icons/antavo-favicon-32x32.png</icon>
+	</menuitem>
+
+	<menuaction id="antavo_extension_settings" menupath="antavo_extension_root" position="100" site="false">
+		<name xml:lang="x-default">Settings</name>
+		<short_description xml:lang="x-default">
+			Manage and modify your Antavo settings.
+		</short_description>
+		<description xml:lang="x-default">
+			Manage and modify your Antavo settings.
+		</description>
+		<!-- no icon specified -->
+		<exec pipeline="AntavoAdmin" node="Settings" />
+	</menuaction>
+	
+	<menuaction id="antavo_extension_logs" menupath="antavo_extension_root" position="120" site="false">
+		<name xml:lang="x-default">Logs</name>
+		<short_description xml:lang="x-default">
+			This module allows for browsing Antavo API logs.
+		</short_description>
+		<description xml:lang="x-default">
+			This module allows for browsing Antavo API logs.
+		</description>
+		<!-- no icon specified -->
+		<exec pipeline="AntavoAdmin" node="Logs" />
+		<sub-pipelines>
+			<pipeline name="TFD-Start" />
+		</sub-pipelines>
+	</menuaction>
+</extensions>

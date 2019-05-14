@@ -1,0 +1,8 @@
+<isdecorate template="util/pt_empty">
+	<table class="error_box n s e w">
+		<tr valign="top">
+			<td class="error_icon top e"></td>
+			<td class="error top" width="100%">${Resource.msg('server.error', 'paypalbm', 'test')}</td>
+		</tr>
+	</table>
+</isdecorate>
