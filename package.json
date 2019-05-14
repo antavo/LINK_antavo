@@ -6,5 +6,8 @@
   "scripts": {
     "lint": "sgmf-scripts --lint js && sgmf-scripts --lint css"
   },
-  "author": "Antavo Ltd."
+  "author": "Antavo Ltd.",
+  "devDependencies": {
+    "sgmf-scripts": "^2.3.0"
+  }
 }
