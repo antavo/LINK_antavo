@@ -1,0 +1,28 @@
+<iscomment>
+	Purpose: Load the Antavo Javascript SDK onto the website pages.
+</iscomment>
+
+<isif condition="${pdict.sdkUrl}">
+	<script type="text/javascript">
+		var onBrandUpdate = onBrandUpdate || function () {};
+	
+	    (function (t, u, c) {
+	        var d = document, o = d.createElement(t), s = d.getElementsByTagName(t)[0];
+	        if (c) {
+	            o.onload = c;
+	        }
+	        o.src = u;
+	        s.parentNode.insertBefore(o, s);
+	    }("script", "${pdict.sdkUrl}", function () {
+	        Antavo.SDK.init(
+	            "${pdict.apiKey}",
+	            "${pdict.customerId}",
+	            {},
+	            onBrandUpdate,
+	            "customer"
+	        );
+	    }));
+	</script>
+<iselse>
+	<!-- Antavo Configuration Error: Endpoint is not configured properly. -->
+</isif>
