@@ -1,15 +1,23 @@
 # Salesforce Commerce Cloud Cartridge
 
+## Importing Custom Object Definitions
+
+To import custom objects and preferences used by the Antavo cartridges, login to the BM and navigate to 
+`Administration -> Site Development -> Import & Export` and click the "Upload" button. Find `int_antavo_metadata.xml` on 
+your computer and upload the file. 
+
+Once the upload is complete, click "Back" and then click the "Import" button 
+underneath the Meta Data section. Select the Antavo settings file and click "Next" to validate the file. 
+
+Once validated, click the "Import" button to finish the process.
+
 ## Importing Service Profiles
 
 Service profiles set up parameters for use in things like HTTP calls 
 made by Antavo's SFCC cartridge. These settings specify values for things such 
 as the API endpoint, API credentials, and the timeout for making HTTP requests. 
 
-To import the service profiles used by the HTTP services, navigate to
- 
-`Administration -> Operations -> Import & Export` 
-
+To import the service profiles used by the HTTP services, navigate to `Administration -> Operations -> Import & Export` 
 and click the “Upload” button under Import & Export Files. 
 Find the `int_antavo_service_profiles.xml` file on your computer and upload the file. 
 
@@ -40,6 +48,7 @@ be found at the official SFCC Documentation repository under
 SFCC Documentation: https://documentation.b2c.commercecloud.salesforce.com/DOC1/index.jsp  
 
 ## Including JS SDK
+
 Include template – a single remote include is necessary to render a JavaScript 
 reference to all pages of the storefront for several purposes: social share, 
 popups, activity tracking, etc. This code is required to be 
@@ -53,3 +62,20 @@ to the bottom of your footer include template, which is typically:
 ```html
 <isinclude url="${URLUtils.url('AntavoJS-Include')}"/>
 ```
+
+## Including Microsite
+
+If you want to display your Loyalty Hub for your customers, the Microsite URL should be
+configured on your Business Manager site.
+
+In order to doing the first step, login to the BM and navigate to 
+`Merchant Tools -> Online Marketing -> Antavo Loyalty -> Microsite Configuration` and fill in the
+`Microsite URL` input field with the corresponding URL.
+
+On the customer facing side, you can embed the Microsite by a single remote include. You can find a 
+predefined controller for doing that, called `AntavoMicrosite-Show`.
+
+It should be noted that you have to define the page template for the mentioned controller for a better
+displaying. 
+
+You can find a sample Microsite implementation under `AntavoSample-Microsite` with the account page template.
