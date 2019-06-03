@@ -17,7 +17,27 @@
 	        Antavo.SDK.init(
 	            "${pdict.apiKey}",
 	            "${pdict.customerId}",
-	            {},
+	            {
+	                auth: {
+	                    method: "${pdict.config.sdk_authentication_method}",
+	                    cookie: 'cookie' == "${pdict.config.sdk_authentication_method}",
+	                },
+	                video: {
+	                    enabled: true,
+	                },
+	                social: {
+	                    enabled: true,
+	                },
+	                notifications: {
+	                    enabled: false,
+	                },
+	                socialShare: {
+	                    enabled: ${pdict.config.social_share_enabled || 1},
+	                },
+	                tracking: {
+	                    hashMethod: "${pdict.config.sdk_hashing_method}",
+	                },
+	            },
 	            onBrandUpdate,
 	            "customer"
 	        );

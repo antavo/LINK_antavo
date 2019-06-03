@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <custom-type type-id="AntavoConfig">
+        <display-name xml:lang="x-default">
+            Antavo Config Data Object
+        </display-name>
+        <description xml:lang="x-default">
+            Stores the Antavo config for the store
+        </description>
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="id">
+            <type>string</type>
+            <min-length>1</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <!-- SDK configuration fields -->
+            <attribute-definition attribute-id="sdk_url">
+                <display-name xml:lang="x-default">SDK URL</display-name>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <min-length>1</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="sdk_authentication_method">
+                <display-name xml:lang="x-default">SDK authentication method</display-name>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <min-length>1</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="sdk_hashing_method">
+                <display-name xml:lang="x-default">SDK hashing method</display-name>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <min-length>1</min-length>
+            </attribute-definition>
+
+            <!-- Microsite configuration fields -->
+            <attribute-definition attribute-id="microsite_url">
+                <display-name xml:lang="x-default">Microsite URL</display-name>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <min-length>1</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="microsite_template">
+                <display-name xml:lang="x-default">Microsite template</display-name>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <min-length>1</min-length>
+            </attribute-definition>
+
+            <!-- Social share configuration fields -->
+            <attribute-definition attribute-id="social_share_enabled">
+                <display-name xml:lang="x-default">Social share enabled</display-name>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <min-length>1</min-length>
+            </attribute-definition>
+        </attribute-definitions>
+    </custom-type>
+</metadata>

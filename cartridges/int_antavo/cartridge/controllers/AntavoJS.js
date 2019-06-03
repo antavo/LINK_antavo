@@ -1,26 +1,27 @@
 var ISML = require('dw/template/ISML');
 var ServiceRegistry = require('dw/svc/ServiceRegistry');
 var HttpService = ServiceRegistry.get('antavo.http');
+var ConfigHelper = require('bm_antavo/cartridge/scripts/utils/config');
 
 /**
  * @returns {Object}
  */
 function getConfiguration() {
-    return HttpService.getConfiguration().getCredential();
+    return ConfigHelper.get().getCustom();
 }
 
 /**
  * @returns {String}
  */
 function getApiKey() {
-    return getConfiguration().getUser();
+    return HttpService.getConfiguration().getCredential().getUser();
 }
 
 /**
  * @returns {String}
  */
 function getSdkUrl() {
-    return "//" + getConfiguration().getURL().replace(/^http(s)?:\/\//, '') + "/sdk/latest-apps-rc";
+    return getConfiguration().sdk_url;
 }
 
 /**
@@ -30,6 +31,7 @@ function include() {
     ISML.renderTemplate('includes/js-sdk', {
         sdkUrl: getSdkUrl(),
         apiKey: getApiKey(),
+        config: getConfiguration(),
         customerId: session.customer.getID(),
     });
 }
