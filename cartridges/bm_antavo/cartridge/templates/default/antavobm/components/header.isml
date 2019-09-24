@@ -1,0 +1,11 @@
+<isinclude template="inc/Modules">
+<isbreadcrumb 
+				name1="Merchant Tools" 
+				url1="${URLUtils.https('ViewApplication-CompressMenuGroup', 'OverviewPage', 'SiteNavigationBar-ShowSiteOverview')}" 
+				name2="Online Marketing" 
+				url2="${URLUtils.https('SiteNavigationBar-ShowMenuitemOverview', 'CurrentMenuItemId', 'marketing')}" 
+				name3="Antavo Loyalty" 
+				url3="${URLUtils.https('AntavoSdk-Settings')}" 
+				name4="${pdict.title}">
+
+<isinclude template="antavobm/components/menutabs">

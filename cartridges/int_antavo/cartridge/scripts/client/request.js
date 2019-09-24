@@ -1,5 +1,5 @@
 /**
- * Utility helper for the Antavo client.
+ * Utility request helper for the Antavo client.
  */
 
 /**

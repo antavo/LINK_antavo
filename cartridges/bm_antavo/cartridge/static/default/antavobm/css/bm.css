@@ -1,0 +1,143 @@
+.antavo-content input {
+	width: 100%;
+}
+
+.antavo-content .pull-right {
+	float: right !important;
+}
+
+.antavo-content .divider {
+	margin-bottom: 10px;
+}
+
+.antavo-content .panel {
+	margin-bottom: 20px;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.antavo-content .panel>.panel-heading {
+	background-color: #fff;
+    position: relative;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.antavo-content h5.panel-title {
+	font-family: inherit;
+    font-weight: 400;
+    line-height: 1.5384616;
+	letter-spacing: -0.015em;
+	font-size: 17px;
+	margin-top: 0;
+    margin-bottom: 0;
+	position: relative;
+}
+
+.antavo-content .panel>.panel-body {
+	position: relative;
+	padding: 20px;
+}
+
+.antavo-content .panel>.panel-footer {
+    position: relative;
+    padding-left: 0;
+    padding-right: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding: 7px 20px;
+    background-color: #fcfcfc;
+    border-top: 1px solid #ddd;
+    min-height: 52px;
+}
+
+.antavo-content .panel-footer>.heading-elements {
+    position: static;
+    margin-top: 0;
+    padding-right: 20px;
+}
+
+.antavo-content .form-group {
+	margin-bottom: 20px;
+    position: relative;	
+}
+
+.antavo-content .form-control {
+	outline: 0;
+	font: inherit;
+    margin: 0;
+	display: block;
+    width: 100%;
+    height: 36px;
+    padding: 7px 12px;
+    font-size: 13px;
+    line-height: 1.5384616;
+    color: #333;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.antavo-content button.btn {
+	transition: all 0.15s ease-in-out;
+	background: #FFF;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	padding: 10px 14px;
+	cursor: pointer;
+}
+
+.antavo-content button.btn.btn-primary {
+    background: #2196f3;
+    border-color: #2196f3;
+	color: #FFF;
+}
+
+.antavo-content button.btn.btn-primary:hover {
+	background: #0c7cd5;
+    border-color: #0b76cc;
+}
+
+.antavo-content .content-group {
+	margin-bottom: 20px !important;
+}
+
+.antavo-content .text-bold {
+	font-weight: 700;
+}
+
+.antavo-content legend {
+	font-size: 12px;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    width: 100%;
+    margin-bottom: 20px;
+    color: #333;
+    border: 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.antavo-content .table_tabs_dis_background {
+	border-bottom: none !important;
+}
+
+.antavo-content .panel.panel-tabbed {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.antavo-content .help-text {
+	margin-top: 8px;
+	color: #999;
+	font-size: 12px;
+	display: block;
+}

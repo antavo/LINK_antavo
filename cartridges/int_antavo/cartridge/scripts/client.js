@@ -1,16 +1,16 @@
+/**
+ * Class to perform operations on an arbitrary Antavo API. 
+ */
+
 var ServiceRegistry = require('dw/svc/ServiceRegistry');
 var ExceptionHelper = require('~/cartridge/scripts/client/exception');
-var RequestHelper = require('~/cartridge/scripts/client/request');
+var Request = require('~/cartridge/scripts/client/request');
 var ResponseHelper = require('~/cartridge/scripts/client/response');
 var HttpService = ServiceRegistry.get('antavo.http');
-
-/**
- * @param {Number} statusCode
- * @returns {Boolean}
- */
-function isAcceptableStatusCode(statusCode) {
-    return statusCode > 199 && statusCode < 300;
-}
+var Utils = require('~/cartridge/scripts/utils');
+var Signature = require("int_antavo/cartridge/scripts/client/signature");
+var Mac = require("dw/crypto/Mac");
+var Encoding = require("dw/crypto/Encoding");
 
 /**
  * @returns {Object}
@@ -41,6 +41,13 @@ function getApiSecret() {
 }
 
 /**
+ * @returns {String}
+ */
+function getRegion() {
+	return getConfiguration().getURL().split(".")[1];
+}
+
+/**
  * @param {String} method
  * @param {String} uri
  * @param {Object} data
@@ -49,21 +56,31 @@ function getApiSecret() {
 function send(method, uri, data) {
     var httpClient = new dw.net.HTTPClient();
     data = data || {};
-    data['api_key'] = getApiKey();
-    httpClient.open(
-        method, 
-        RequestHelper.prepareUrl(
-            getApiUrl() + "/" + uri.replace(/^\//, ''), 
-            !RequestHelper.isBodyAllowed(method) ? data : null
-        )
+    //data['api_key'] = getApiKey();
+    var url = Request.prepareUrl(
+        getApiUrl() + "/" + uri.replace(/^\//, ''), 
+        !Request.isBodyAllowed(method) ? data : null
     );
+    httpClient.open(method, url);
 	// Adding the default request headers
-    httpClient.setRequestHeader('Content-Type', 'application/json; charset="UTF-8"');
+    httpClient.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset="UTF-8"');
     httpClient.setRequestHeader('User-Agent', 'SFCC Cartridge Client 19.5.2');
-    // TODO: [fekete_zsolt@2019-05-14] Signing the request
+    
+    if (Request.isBodyAllowed(method) && Object.keys(data).length) {
+        var payload = Utils.httpBuildQuery(data);
+    }
+    
+    // Adding the signature string
+    var time = 1 * (new Date().getTime() / 1000).toFixed(0);
+    var signer = new Signature.Signer(getRegion(), getApiKey(), getApiSecret(), time);
+    httpClient.setRequestHeader("Authorization", signer.getAuthorizationHeader(signer.calculateSignature(method, url, data)));
+    httpClient.setRequestHeader("Date", Utils.gmdate('c', time));
+    httpClient.setRequestHeader("Host", Utils.parseUrl(url, 'host'));
+    
+    // Set the request timeout to 3s
     httpClient.setTimeout(3000);
     // Performing the request
-    httpClient.send(RequestHelper.isBodyAllowed(method) ? JSON.stringify(data) : '');
+    httpClient.send(Request.isBodyAllowed(method) ? payload : '');
 
     // If the response status code is not 2xx, return
     if (!ResponseHelper.isStatusAccepted(httpClient.statusCode)) {
@@ -90,7 +107,7 @@ function send(method, uri, data) {
  */
 function getCustomer(id) {
     return send(
-        RequestHelper.METHOD_GET, 
+        Request.METHOD_GET, 
         '/customers/' + encodeURIComponent(id)
     );
 }
@@ -102,7 +119,7 @@ function getCustomer(id) {
  * @returns {Object}
  */
 function sendEvent(customer, action, data) {
-    return send(RequestHelper.METHOD_POST, '/events', {
+    return send(Request.METHOD_POST, '/events', {
         customer: customer,
         action: action,
         data: data

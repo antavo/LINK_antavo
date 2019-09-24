@@ -1,8 +1,11 @@
+/**
+ * Class to cast Antavo API error message and code to Javascript exception object.
+ */
 
 /**
- * @param {String} message
- * @param {Number} code
- * @returns {Object}
+ * @param {String} message  The error message from the API response.
+ * @param {Number} code  The error code from the API response.
+ * @returns {Object}  The exception object.
  */
 function createException(message, code) {
     return {

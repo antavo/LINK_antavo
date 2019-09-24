@@ -1,40 +1,27 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<extensions xmlns="http://www.demandware.com/xml/bmmodules/2007-12-11" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.demandware.com/xml/bmmodules/2007-12-11 bmext.xsd">
-	<menuitem id="antavo_extension_root" position="99999" site="false">
-		<name xml:lang="x-default">Antavo Loyalty</name>
-		<short_description xml:lang="x-default">
-			The Antavo Loyalty Integration makes it easy for SFCC developers to build Antavo-powered applications.
-  		</short_description>
-		<description xml:lang="x-default">
-			The Antavo Loyalty Integration makes it easy for SFCC developers to build Antavo-powered applications.
-  		</description>
-		<icon>icons/antavo-favicon-32x32.png</icon>
-	</menuitem>
+<extensions xmlns="http://www.demandware.com/xml/bmmodules/2007-12-11"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.demandware.com/xml/bmmodules/2007-12-11 bmext.xsd">
 
-	<menuaction id="antavo_extension_settings" menupath="antavo_extension_root" position="100" site="false">
-		<name xml:lang="x-default">Settings</name>
+	<menuaction id="antavo_transactions_manager" menupath="marketing" position="500" site="true">
+		<name xml:lang="x-default">
+			Antavo Loyalty
+		</name>
 		<short_description xml:lang="x-default">
-			Manage and modify your Antavo settings.
+			TODO
 		</short_description>
 		<description xml:lang="x-default">
-			Manage and modify your Antavo settings.
+			TODO
 		</description>
-		<!-- no icon specified -->
-		<exec pipeline="AntavoAdmin" node="Settings" />
-	</menuaction>
-	
-	<menuaction id="antavo_extension_logs" menupath="antavo_extension_root" position="120" site="false">
-		<name xml:lang="x-default">Logs</name>
-		<short_description xml:lang="x-default">
-			This module allows for browsing Antavo API logs.
-		</short_description>
-		<description xml:lang="x-default">
-			This module allows for browsing Antavo API logs.
-		</description>
-		<!-- no icon specified -->
-		<exec pipeline="AntavoAdmin" node="Logs" />
+		<exec pipeline="AntavoAdminSdk" node="Settings" />
 		<sub-pipelines>
-			<pipeline name="TFD-Start" />
+			<pipeline name="AntavoAdminSdk-Settings" />
+			<pipeline name="AntavoAdminSdk-ProcessSettings" />
+			<pipeline name="AntavoAdminMicrosite-Settings" />
+			<pipeline name="AntavoAdminMicrosite-ProcessSettings" />
+			<pipeline name="AntavoAdminSocialShare-Settings" />
+			<pipeline name="AntavoAdminSocialShare-ProcessSettings" />
 		</sub-pipelines>
+		<icon>antavobm/icons/antavo-favicon-32x32.png</icon>
 	</menuaction>
 </extensions>

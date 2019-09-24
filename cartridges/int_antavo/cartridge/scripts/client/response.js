@@ -1,14 +1,18 @@
 /**
- * @param {Number} statusCode
- * @returns {Boolean}
+ * Class to validate and parse Antavo API responses.
+ */
+
+/**
+ * @param {Number} statusCode  The response's HTTP status code.
+ * @returns {Boolean}  Validity of the response code.
  */
 function isStatusAccepted(statusCode) {
     return statusCode >= 100 && statusCode < 400;	
 }
 
 /**
- * @param {String} result
- * @returns {Object}
+ * @param {String} result  The JSON response from Antavo API.
+ * @returns {Object}  The derived Javascript object from the response.
  */
 function parseJsonBody(result) {
     try {
@@ -19,9 +23,9 @@ function parseJsonBody(result) {
 }
 
 /**
- * @param {String} body
- * @param {String} contentType
- * @returns
+ * @param {String} body  The raw Antavo API response.
+ * @param {String} contentType  The "Content-Type" header from the response
+ * @returns {Object}  The derived Javascript object from the response.
  */
 function parseBody(body, contentType) {
     if (typeof contentType !== 'string') {

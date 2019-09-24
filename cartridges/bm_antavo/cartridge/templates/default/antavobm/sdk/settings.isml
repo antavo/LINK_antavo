@@ -1,0 +1,69 @@
+<isdecorate template="antavobm/utils/pt_default">
+	<isinclude template="antavobm/components/header" />
+	
+	<form class="panel panel-tabbed" action="${URLUtils.httpContinue()}" method="post">
+		<div class="panel-body">
+			<div class="form-group">
+				<label class="control-label">
+					${Resource.msg('sdk_settings.url_label', 'antavobm', null)}
+					<span class="star">*</span>
+				</label>
+				
+		        <input type="url" class="form-control" name="sdk_url" value="${pdict.config.getCustom().sdk_url || ''}" required>
+		        
+		        <span class="help-text">
+		        	${Resource.msg('sdk_settings.url_help_text', 'antavobm', null)}
+		        </span>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label">
+					${Resource.msg('sdk_settings.authentication_method_label', 'antavobm', null)}
+					<span class="star">*</span>
+				</label>
+		        
+		        <select class="form-control" name="sdk_authentication_method">
+		        	<option value="cookie" ${pdict.config.getCustom().sdk_authentication_method == 'cookie' ? 'selected' : ''}>
+		        		${Resource.msg('sdk_settings.authentication_method_option_cookie', 'antavobm', null)}
+		        	</option>
+		        	
+		        	<option value="social" ${pdict.config.getCustom().sdk_authentication_method == 'social' ? 'selected' : ''}>
+		        		${Resource.msg('sdk_settings.authentication_method_option_social', 'antavobm', null)}
+		        	</option>
+		        </select>
+		        
+		        <span class="help-text">
+		        	${Resource.msg('sdk_settings.authentication_method_help_text', 'antavobm', null)}
+		        </span>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label">
+					${Resource.msg('sdk_settings.hash_method_label', 'antavobm', null)}
+					<span class="star">*</span>
+				</label>
+				
+				<select class="form-control" name="sdk_hashing_method">
+					<option value="hash" ${pdict.config.getCustom().sdk_hashing_method == 'hash' ? 'selected' : ''}>
+						${Resource.msg('sdk_settings.hash_method_option_hash', 'antavobm', null)}
+					</option>
+					<option value="query-string" ${pdict.config.getCustom().sdk_hashing_method == 'query-string' ? 'selected' : ''}>
+						${Resource.msg('sdk_settings.hash_method_option_query_string', 'antavobm', null)}
+					</option>
+				</select>
+				
+				<span class="help-text">
+					${Resource.msg('sdk_settings.hash_method_help_text', 'antavobm', null)}
+				</span>
+			</div>
+		</div>
+		
+		<div class="panel-footer">
+			<div class="pull-right">
+				<button type="submit" class="btn btn-primary">
+					${Resource.msg('forms.submit', 'antavobm', null)}
+				</button>
+			</div>
+		</div>
+	</form>
+</isdecorate>

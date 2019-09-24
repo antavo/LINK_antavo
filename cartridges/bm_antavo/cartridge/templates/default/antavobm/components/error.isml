@@ -1,0 +1,8 @@
+<isdecorate template="antavobm/utils/pt_empty">
+	<table class="error_box n s e w">
+		<tr valign="top">
+			<td class="error_icon top e"></td>
+			<td class="error top" width="100%">Error occurred</td>
+		</tr>
+	</table>
+</isdecorate>

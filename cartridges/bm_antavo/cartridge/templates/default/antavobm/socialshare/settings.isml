@@ -1,0 +1,36 @@
+<isdecorate template="antavobm/utils/pt_default">
+	<isinclude template="antavobm/components/header" />
+	
+	<form class="panel panel-tabbed" action="${URLUtils.httpContinue()}" method="post">
+		<div class="panel-body">
+			<div class="form-group">
+				<label class="control-label">
+					${Resource.msg('socialshare_settings.enabled_title', 'antavobm', null)}
+					<span class="star">*</span>
+				</label>
+				
+				<select class="form-control" name="social_share_enabled">
+					<option value="1" ${pdict.config.getCustom().social_share_enabled == '1' ? 'selected' : ''}>
+						${Resource.msg('core.yes', 'antavobm', null)}
+					</option>
+					
+					<option value="0" ${pdict.config.getCustom().social_share_enabled == '0' ? 'selected' : ''}>
+						${Resource.msg('core.no', 'antavobm', null)}
+					</option>
+				</select>
+				
+				<span class="help-text">
+					${Resource.msg('socialshare_settings.enabled_help_text', 'antavobm', null)}
+				</span>
+			</div>
+		</div>
+		
+		<div class="panel-footer">
+			<div class="pull-right">
+				<button type="submit" class="btn btn-primary">
+					${Resource.msg('forms.submit', 'antavobm', null)}
+				</button>
+			</div>
+		</div>
+	</form>
+</isdecorate>

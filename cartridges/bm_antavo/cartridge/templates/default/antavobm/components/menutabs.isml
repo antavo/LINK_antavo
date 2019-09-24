@@ -1,0 +1,39 @@
+<div class="divider"></div>
+
+<img src="${URLUtils.staticURL('/antavobm/icons/antavo-favicon-32x32.png')}" class="pull-right">
+
+<table border="0" cellspacing="0" cellpadding="0">
+	<tbody>
+		<tr>
+			<td class="${pdict.activeAntavoPage == 'sdk' ? 'w e n table_tabs_en_background' : 'e n s table_tabs_dis_background'}" nowrap="nowrap">
+				<isif condition="${pdict.activeAntavoPage == 'sdk'}">
+					${Resource.msg('sdk_settings.title', 'antavobm', null)}
+				<iselse>
+					<a href="${URLUtils.https('AntavoAdminSdk-Settings')}" class="table_tabs_dis">
+						${Resource.msg('sdk_settings.title', 'antavobm', null)}
+					</a>
+				</isif>
+			</td>
+			
+			<td class="${pdict.activeAntavoPage == 'microsite' ? 'w e n table_tabs_en_background' : 'e n s table_tabs_dis_background'}" nowrap="nowrap">
+				<isif condition="${pdict.activeAntavoPage == 'microsite'}">
+					${Resource.msg('microsite_settings.title', 'antavobm', null)}
+				<iselse>
+					<a href="${URLUtils.https('AntavoAdminMicrosite-Settings')}" class="table_tabs_dis">
+						${Resource.msg('microsite_settings.title', 'antavobm', null)}
+					</a>
+				</isif>
+			</td>
+			
+			<td class="${pdict.activeAntavoPage == 'socialshare' ? 'w e n table_tabs_en_background' : 'e n s table_tabs_dis_background'}" nowrap="nowrap">
+				<isif condition="${pdict.activeAntavoPage == 'socialshare'}">
+					${Resource.msg('socialshare_settings.title', 'antavobm', null)}
+				<iselse>
+					<a href="${URLUtils.https('AntavoAdminSocialShare-Settings')}" class="table_tabs_dis">
+						${Resource.msg('socialshare_settings.title', 'antavobm', null)}
+					</a>
+				</isif>
+			</td>
+		</tr>
+	</tbody>
+</table>

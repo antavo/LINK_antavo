@@ -1,0 +1,41 @@
+<isdecorate template="antavobm/utils/pt_default">
+	<isinclude template="antavobm/components/header" />
+
+	<form class="panel panel-tabbed" action="${URLUtils.httpContinue()}" method="post">
+		<div class="panel-body">
+			<div class="form-group">
+				<label class="control-label">
+					${Resource.msg('microsite_settings.url_label', 'antavobm', null)}
+					<span class="star">*</span>
+				</label>
+				
+		        <input type="url" class="form-control" name="microsite_url" value="${pdict.config.getCustom().microsite_url || ''}" required>
+		        
+		        <span class="help-text">
+		        	${Resource.msg('microsite_settings.url_help_text', 'antavobm', null)}
+		        </span>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label">
+					${Resource.msg('microsite_settings.template_label', 'antavobm', null)}
+					<span class="star">*</span>
+				</label>
+				
+		        <input type="text" class="form-control" name="microsite_template" value="${pdict.config.getCustom().microsite_template || ''}" required>
+		        
+		        <span class="help-text">
+		        	${Resource.msg('microsite_settings.template_help_text', 'antavobm', null)}
+		        </span>
+			</div>	
+		</div>
+		
+		<div class="panel-footer">
+			<div class="pull-right">
+				<button type="submit" class="btn btn-primary">
+					${Resource.msg('forms.submit', 'antavobm', null)}
+				</button>
+			</div>
+		</div>
+	</form>
+</isdecorate>

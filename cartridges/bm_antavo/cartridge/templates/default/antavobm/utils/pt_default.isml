@@ -1,0 +1,7 @@
+<isdecorate template="application/MenuFrame">
+	<link rel="stylesheet" href="${URLUtils.staticURL('/antavobm/css/bm.css')}" />
+		
+	<div class="antavo-content">
+		<isreplace/>
+	</div>
+</isdecorate>
