@@ -144,9 +144,9 @@ function Signer(region, key, secret, time) {
                 Mac(Mac.HMAC_SHA_256).digest(
                     this.region,
                     Mac(Mac.HMAC_SHA_256).digest(
-                	    Utils.gmdate("Ymd", this.time),
+                        Utils.gmdate("Ymd", this.time),
                         "ANTAVO" + this.secret
-            		)
+                    )
                 )
             )
         );
@@ -166,7 +166,7 @@ function Signer(region, key, secret, time) {
                     url,
                     (Request.isBodyAllowed(method)) && Object.keys(data).length
                         ? Utils.httpBuildQuery(data)
-                	    : ""
+                        : ""
     	        ),
                 this.createSigningKey()
             )
