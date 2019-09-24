@@ -162,7 +162,7 @@ function Signer(region, key, secret, time) {
         return Encoding.toHex(
             Mac(Mac.HMAC_SHA_256).digest(
                 this.createSignatureString(
-                	method,
+                    method,
                     url,
                     (Request.isBodyAllowed(method)) && Object.keys(data).length
                         ? Utils.httpBuildQuery(data)
