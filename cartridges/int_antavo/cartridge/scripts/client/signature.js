@@ -144,8 +144,8 @@ function Signer(region, key, secret, time) {
                 Mac(Mac.HMAC_SHA_256).digest(
                     this.region,
                     Mac(Mac.HMAC_SHA_256).digest(
-                    	Utils.gmdate("Ymd", this.time),
-        				"ANTAVO" + this.secret
+                	    Utils.gmdate("Ymd", this.time),
+                        "ANTAVO" + this.secret
             		)
                 )
             )
@@ -159,18 +159,18 @@ function Signer(region, key, secret, time) {
      * @returns {String}  The calculated signature string what will be appended to the request.
      */
     this.calculateSignature = function (method, url, data) {
-    	return Encoding.toHex(
-			Mac(Mac.HMAC_SHA_256).digest(
-				this.createSignatureString(
-			        method,
-			        url,
-			        (Request.isBodyAllowed(method)) && Object.keys(data).length
-			            ? Utils.httpBuildQuery(data)
-			            : ""
-			    ), 
-				this.createSigningKey()
-			)
-		);
+        return Encoding.toHex(
+            Mac(Mac.HMAC_SHA_256).digest(
+                this.createSignatureString(
+                	method,
+                    url,
+                    (Request.isBodyAllowed(method)) && Object.keys(data).length
+                        ? Utils.httpBuildQuery(data)
+                	    : ""
+    	        ),
+                this.createSigningKey()
+            )
+        );
     }
     
     /**
@@ -179,11 +179,11 @@ function Signer(region, key, secret, time) {
      */
     this.getAuthorizationHeader = function (signature) {
     	return "ANTAVO-HMAC-SHA256 Credential={apiKey}/{date}/{region}/{service}/antavo_request, SignedHeaders=date;host, Signature={signature}"
-    		.replace("{apiKey}", this.key)
-    		.replace("{date}", Utils.gmdate("Ymd", this.time))
-    		.replace("{region}", this.region)
-    		.replace("{service}", this.service)
-    		.replace("{signature}", signature);
+    	    .replace("{apiKey}", this.key)
+    	    .replace("{date}", Utils.gmdate("Ymd", this.time))
+    	    .replace("{region}", this.region)
+    	    .replace("{service}", this.service)
+    	    .replace("{signature}", signature);
     }
 };
 
