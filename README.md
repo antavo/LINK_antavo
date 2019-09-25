@@ -133,3 +133,24 @@ We recommend adding the following line to the bottom of your header template, wh
     </a>
 </li>
 ```
+
+#### Sending customer registrations
+
+If you want to track customer registrations, you should place the following code snippet right
+after the opt-in code.
+
+```javascript
+var eventHandler = require("int_antavo/cartridge/scripts/events/Handler");
+eventHandler.Handler.fire(eventHandler.EVENT_AFTER_CUSTOMER_OPT_IN, this, {
+    customer: {
+        id: profileValidation.ID,
+        email: profileValidation.profile.email,
+        first_name: profileValidation.profile.firstName,
+        last_name: profileValidation.profile.lastName,
+    },
+});
+```
+
+In the SiteGenesis reference controller, you should inject this code to:
+
+`storefront_controllers/cartridge/controllers/Account.js:428`
