@@ -180,4 +180,4 @@ you should place the following code snippet to your cart partial:
 
 In the SiteGenesis reference template, you should inject this code to:
 
-`storefront_core/cartridge/templates/default/checkout/cart/cart.isml`
+`storefront_core/cartridge/templates/default/checkout/cart/cart.isml:856`
