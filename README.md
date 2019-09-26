@@ -154,3 +154,17 @@ eventHandler.Handler.fire(eventHandler.EVENT_AFTER_CUSTOMER_OPT_IN, this, {
 In the SiteGenesis reference controller, you should inject this code to:
 
 `storefront_controllers/cartridge/controllers/Account.js:428`
+
+#### Showing incentivizing points on the product page
+
+If you want to show the amount of the incentivizing points on the product page,
+you should place the following code snippet to your price partial.
+
+```
+<isinclude template="antavo/includes/product-points" />
+```
+
+Make sure that the `pdict` object contains the Product variable at least.
+In the SiteGenesis reference template, you should inject this code to:
+
+`storefront_core/cartridge/templates/default/product/components/pricing.isml:158`
