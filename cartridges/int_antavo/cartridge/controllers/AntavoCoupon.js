@@ -11,6 +11,10 @@ var Error = function (message, code) {
 }
 
 function create() {
+    var eventHandler = require("int_antavo/cartridge/scripts/events/Handler");
+    eventHandler.Handler.fire(eventHandler.EVENT_AFTER_CUSTOMER_OPT_IN, this, {});
+    //template.renderJson(eventHandler);
+    return;
 	var client = require("int_antavo/cartridge/scripts/client");
 	try {
 		var result = client.sendEvent("1", "point_add", {

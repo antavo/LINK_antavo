@@ -1,0 +1,25 @@
+<div style="width: 100%; max-width: inherit;" class="extra-info">
+    <div class="antavo-points"></div>
+</div>
+
+<script>
+	document.addEventListener("antavo-brand-updated", function () {
+	    Antavo.IncentivizedPurchase.init();
+	    Antavo.Campaigns.init();
+
+	    $.ajax({
+	    	type: "GET",
+	        url: "${URLUtils.url('AntavoCart-Data')}",
+	        dataType: "json"
+	    }).success(function (data) {
+	        Antavo.Campaigns.calculateCampaignBonus(
+                data,
+    	        function (messages) {
+    	            document.querySelectorAll('div[class="antavo-points"]').forEach(function (container) {
+   	                    container.innerHTML = messages.future;
+   	                });
+    	        }
+    	    );
+        });
+	});
+</script>

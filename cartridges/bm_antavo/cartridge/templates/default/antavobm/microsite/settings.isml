@@ -1,6 +1,6 @@
 <isdecorate template="antavobm/utils/pt_default">
 	<isinclude template="antavobm/components/header" />
-
+	
 	<form class="panel panel-tabbed" action="${URLUtils.httpContinue()}" method="post">
 		<div class="panel-body">
 			<div class="form-group">

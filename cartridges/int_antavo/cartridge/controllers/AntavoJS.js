@@ -21,7 +21,7 @@ function getSdkUrl() {
  *
  */
 function include() {
-    ISML.renderTemplate('includes/js-sdk', {
+    ISML.renderTemplate('antavo/includes/js-sdk', {
         sdkUrl: getSdkUrl(),
         apiKey: config.getApiKey(),
         config: getConfiguration(),
