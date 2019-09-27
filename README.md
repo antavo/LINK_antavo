@@ -133,3 +133,51 @@ We recommend adding the following line to the bottom of your header template, wh
     </a>
 </li>
 ```
+
+#### Sending customer registrations
+
+If you want to track customer registrations, you should place the following code snippet right
+after the opt-in code.
+
+```javascript
+var eventHandler = require("int_antavo/cartridge/scripts/events/Handler");
+eventHandler.Handler.fire(eventHandler.EVENT_AFTER_CUSTOMER_OPT_IN, this, {
+    customer: {
+        id: profileValidation.ID,
+        email: profileValidation.profile.email,
+        first_name: profileValidation.profile.firstName,
+        last_name: profileValidation.profile.lastName,
+    },
+});
+```
+
+In the SiteGenesis reference controller, you should inject this code to:
+
+`storefront_controllers/cartridge/controllers/Account.js:428`
+
+#### Showing incentivizing points on the product page
+
+If you want to show the amount of the incentivizing points on the product page,
+you should place the following code snippet to your price partial:
+
+```
+<isinclude template="antavo/includes/product-points" />
+```
+
+Make sure that the `pdict` object contains the Product variable at least.
+In the SiteGenesis reference template, you should inject this code to:
+
+`storefront_core/cartridge/templates/default/product/components/pricing.isml:158`
+
+#### Showing incentivizing points on the cart page
+
+If you want to show the summarized amount of the incentivizing points on the cart page,
+you should place the following code snippet to your cart partial:
+
+```
+<isinclude url="${URLUtils.url('AntavoCart-Include')}"/>
+```
+
+In the SiteGenesis reference template, you should inject this code to:
+
+`storefront_core/cartridge/templates/default/checkout/cart/cart.isml:856`
