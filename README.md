@@ -228,3 +228,17 @@ you should place the following code snippet to your cart partial:
 In the SiteGenesis reference template, you should inject this code to:
 
 `storefront_core/cartridge/templates/default/checkout/cart/cart.isml:856`
+
+#### Sending successful checkout events to Antavo
+
+If you want to track customers' checkouts with Antavo, you should place the following
+snippet to your checkout controller, where the `order` variable is an Order instance:
+
+```javascript
+var eventHandler = require("int_antavo/cartridge/scripts/events/Handler");
+eventHandler.Handler.fire(eventHandler.EVENT_AFTER_CHECKOUT, this, { order: order });
+```
+
+In the SiteGenesis reference template, you should inject this code to:
+
+`storefront_controllers/cartridge/controllers/COPlaceOrder.js:179`
