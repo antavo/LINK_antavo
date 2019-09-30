@@ -142,6 +142,7 @@ Administration >  Site Development >  System Object Types > Customer Profile
 
 Then click on the "New" button, and type in these settings:
 
+
 | *Name* | *Value* | *Description* |
 | ID | `loyalty_optin` | Programmatic name for the property |
 | Display name | `Loyalty opt-in` | Readable property name |
@@ -149,6 +150,7 @@ Then click on the "New" button, and type in these settings:
 | Value type | `boolean` | - |
 | Mandatory | _unticked_ | - |
 | Externally managed | _unticked_ | - |
+
 
 ##### Add a new checkbox to your registration form
 
