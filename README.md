@@ -175,6 +175,27 @@ In the SiteGenesis reference template, you should inject this code to:
 
 `storefront_core/cartridge/templates/default/account/user/registration.isml:55`
 
+##### Checkbox localization
+
+You can translate the opt-in checkbox's label through the default Demandware localization facility.
+Just add a new entry to your `forms.properties` file, like:
+
+```bash
+profile.loyalty_optin=By checking this box you will accept to join our loyalty program
+```
+
+In the SiteGenesis reference template, you should inject this code to:
+
+`storefront_core/cartridge/templates/resources/forms.properties`
+
+You can translate the checkbox text to other languages. For example, if you want to
+translate to German, add a new locale entry to your `forms_de_DE.properties`, like:
+
+```bash
+profile.loyalty_optin=Wenn Sie dieses Kästchen markieren, akzeptieren Sie, an unserem Treueprogramm teilzunehmen
+```
+
+
 ##### Sending opt-in event to Antavo's API
 
 You should place the following code snippet right after the opt-in code; this code
