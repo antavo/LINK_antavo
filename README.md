@@ -136,8 +136,46 @@ We recommend adding the following line to the bottom of your header template, wh
 
 #### Sending customer registrations
 
-If you want to track customer registrations, you should place the following code snippet right
-after the opt-in code.
+##### Create a new customer attribute in the Business Manager
+ 
+Administration >  Site Development >  System Object Types > Customer Profile
+
+Then click on the "New" button, and type in these settings:
+
+| *Name* | *Value* | *Description* |
+| ID | `loyalty_optin` | Programmatic name for the property |
+| Display name | `Loyalty opt-in` | Readable property name |
+| Help text | _NULL_ | It can be useful if you fill it with some useful words, but it's not mandatory |
+| Value type | `boolean` | - |
+| Mandatory | _unticked_ | - |
+| Externally managed | _unticked_ | - |
+
+##### Add a new checkbox to your registration form
+
+`<field formid="loyalty_optin" label="profile.loyalty_optin" type="boolean" />`
+
+In the SiteGenesis reference template, you should inject this code to:
+
+`storefront_core/cartridge/forms/default/profile.xml:12`
+
+##### Show the loyalty opt-in checkbox in the template
+
+Add these lines to your registration template:
+
+```html
+<isif condition="${!(customer.authenticated && customer.registered)}">
+	<isinputfield formfield="${pdict.CurrentForms.profile.customer.loyalty_optin}" type="checkbox"/>
+</isif>
+```
+
+In the SiteGenesis reference template, you should inject this code to:
+
+`storefront_core/cartridge/templates/default/account/user/registration.isml:55`
+
+##### Sending opt-in event to Antavo's API
+
+You should place the following code snippet right after the opt-in code; this code
+will perform an API request to the Antavo Events API.
 
 ```javascript
 var eventHandler = require("int_antavo/cartridge/scripts/events/Handler");
