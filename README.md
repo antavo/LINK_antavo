@@ -138,7 +138,9 @@ We recommend adding the following line to the bottom of your header template, wh
 
 ##### Add a new checkbox to your registration form
 
-`<field formid="loyalty_optin" label="profile.loyalty_optin" type="boolean" />`
+```html
+<field formid="loyalty_optin" label="profile.loyalty_optin" type="boolean" />
+```
 
 In the SiteGenesis reference template, you should inject this code to:
 
@@ -205,7 +207,7 @@ In the SiteGenesis reference controller, you should inject this code to:
 If you want to show the amount of the incentivizing points on the product page,
 you should place the following code snippet to your price partial:
 
-```
+```html
 <isinclude template="antavo/includes/product-points" />
 ```
 
@@ -219,7 +221,7 @@ In the SiteGenesis reference template, you should inject this code to:
 If you want to show the summarized amount of the incentivizing points on the cart page,
 you should place the following code snippet to your cart partial:
 
-```
+```html
 <isinclude url="${URLUtils.url('AntavoCart-Include')}"/>
 ```
 
