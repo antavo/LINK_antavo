@@ -136,23 +136,6 @@ We recommend adding the following line to the bottom of your header template, wh
 
 #### Sending customer registrations
 
-##### Create a new customer attribute in the Business Manager
- 
-Administration >  Site Development >  System Object Types > Customer Profile
-
-Then click on the "New" button, and type in these settings:
-
-
-| **Name**             | **Value**          | **Description**                                                                  |
-| ---                  | ---                | ---                                                                              |
-| ID                   | `loyaltyOptIn`    | Programmatic name for the property                                               |
-| Display name         | `Loyalty opt-in`   | Readable property name                                                           |
-| Help text            | _NULL_             |  It can be useful if you fill it with some useful words, but it's not mandatory  |
-| Value type           | `boolean`          | -                                                                                |
-| Mandatory            | _unticked_         | -                                                                                |
-| Externally managed   | _unticked_         | -                                                                                |
-
-
 ##### Add a new checkbox to your registration form
 
 `<field formid="loyalty_optin" label="profile.loyalty_optin" type="boolean" />`
@@ -195,7 +178,6 @@ translate to German, add a new locale entry to your `forms_de_DE.properties`, li
 profile.loyalty_optin=Wenn Sie dieses Kästchen markieren, akzeptieren Sie, an unserem Treueprogramm teilzunehmen
 ```
 
-
 ##### Sending opt-in event to Antavo's API
 
 You should place the following code snippet right after the opt-in code; this code
@@ -209,6 +191,7 @@ eventHandler.Handler.fire(eventHandler.EVENT_AFTER_CUSTOMER_OPT_IN, this, {
         email: profileValidation.profile.email,
         first_name: profileValidation.profile.firstName,
         last_name: profileValidation.profile.lastName,
+        opt_in: app.getForm("profile").object.customer.loyaltyOptIn.getValue(),
     },
 });
 ```
