@@ -145,7 +145,7 @@ Then click on the "New" button, and type in these settings:
 
 | **Name**             | **Value**          | **Description**                                                                  |
 | ---                  | ---                | ---                                                                              |
-| ID                   | `loyalty_optin`    | Programmatic name for the property                                               |
+| ID                   | `loyaltyOptIn`    | Programmatic name for the property                                               |
 | Display name         | `Loyalty opt-in`   | Readable property name                                                           |
 | Help text            | _NULL_             |  It can be useful if you fill it with some useful words, but it's not mandatory  |
 | Value type           | `boolean`          | -                                                                                |
