@@ -152,7 +152,7 @@ Add these lines to your registration template:
 
 ```html
 <isif condition="${!(customer.authenticated && customer.registered)}">
-	<isinputfield formfield="${pdict.CurrentForms.profile.customer.loyalty_optin}" type="checkbox"/>
+	<isinputfield formfield="${pdict.CurrentForms.profile.customer.loyalty_optin}" type="checkbox" />
 </isif>
 ```
 
@@ -217,7 +217,7 @@ If you want to show the summarized amount of the incentivizing points on the car
 you should place the following code snippet to your cart partial:
 
 ```html
-<isinclude url="${URLUtils.url('AntavoCart-Include')}"/>
+<isinclude url="${URLUtils.url('AntavoCart-Include')}" />
 ```
 
 In the SiteGenesis reference template, you should inject this code to:
