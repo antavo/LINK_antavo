@@ -237,3 +237,16 @@ eventHandler.Handler.fire(eventHandler.EVENT_AFTER_CHECKOUT, this, { order: orde
 In the SiteGenesis reference template, you should inject this code to:
 
 `storefront_controllers/cartridge/controllers/COPlaceOrder.js:179`
+
+#### Showing the opt-in button for existing customers
+
+If you want to place an "Opt-in" button for your existing customer, inject the following
+code snippet to your customer page.
+
+```javascript
+<isinclude template="antavo/includes/profile/opt-in" />
+```
+
+In the SiteGenesis reference template, you should inject this code to:
+
+`storefront_core/cartridge/templates/default/account/user/registration.isml:80`
