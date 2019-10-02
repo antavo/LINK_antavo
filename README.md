@@ -136,12 +136,59 @@ We recommend adding the following line to the bottom of your header template, wh
 
 #### Sending customer registrations
 
-If you want to track customer registrations, you should place the following code snippet right
-after the opt-in code.
+##### Add a new checkbox to your registration form
+
+```html
+<field formid="loyalty_optin" label="profile.loyalty_optin" type="boolean" />
+```
+
+In the SiteGenesis reference template, you should inject this code to:
+
+`storefront_core/cartridge/forms/default/profile.xml:12`
+
+##### Show the loyalty opt-in checkbox in the template
+
+Add these lines to your registration template:
+
+```html
+<isif condition="${!(customer.authenticated && customer.registered)}">
+	<isinputfield formfield="${pdict.CurrentForms.profile.customer.loyalty_optin}" type="checkbox"/>
+</isif>
+```
+
+In the SiteGenesis reference template, you should inject this code to:
+
+`storefront_core/cartridge/templates/default/account/user/registration.isml:55`
+
+##### Checkbox localization
+
+You can translate the opt-in checkbox's label through the default Demandware localization facility.
+Just add a new entry to your `forms.properties` file, like:
+
+```bash
+profile.loyalty_optin=By checking this box you will accept to join our loyalty program
+```
+
+In the SiteGenesis reference template, you should inject this code to:
+
+`storefront_core/cartridge/templates/resources/forms.properties`
+
+You can translate the checkbox text to other languages. For example, if you want to
+translate to German, add a new locale entry to your `forms_de_DE.properties`, like:
+
+```bash
+profile.loyalty_optin=Wenn Sie dieses Kästchen markieren, akzeptieren Sie, an unserem Treueprogramm teilzunehmen
+```
+
+##### Sending opt-in event to Antavo's API
+
+You should place the following code snippet right after the opt-in code; this code
+will perform an API request to the Antavo Events API.
 
 ```javascript
 var eventHandler = require("int_antavo/cartridge/scripts/events/Handler");
 eventHandler.Handler.fire(eventHandler.EVENT_AFTER_CUSTOMER_OPT_IN, this, {
+    opt_in: app.getForm("profile").object.customer.loyaltyOptIn.getValue(),
     customer: {
         id: profileValidation.ID,
         email: profileValidation.profile.email,
@@ -160,7 +207,7 @@ In the SiteGenesis reference controller, you should inject this code to:
 If you want to show the amount of the incentivizing points on the product page,
 you should place the following code snippet to your price partial:
 
-```
+```html
 <isinclude template="antavo/includes/product-points" />
 ```
 
@@ -174,10 +221,24 @@ In the SiteGenesis reference template, you should inject this code to:
 If you want to show the summarized amount of the incentivizing points on the cart page,
 you should place the following code snippet to your cart partial:
 
-```
+```html
 <isinclude url="${URLUtils.url('AntavoCart-Include')}"/>
 ```
 
 In the SiteGenesis reference template, you should inject this code to:
 
 `storefront_core/cartridge/templates/default/checkout/cart/cart.isml:856`
+
+#### Sending successful checkout events to Antavo
+
+If you want to track customers' checkouts with Antavo, you should place the following
+snippet to your checkout controller, where the `order` variable is an Order instance:
+
+```javascript
+var eventHandler = require("int_antavo/cartridge/scripts/events/Handler");
+eventHandler.Handler.fire(eventHandler.EVENT_AFTER_CHECKOUT, this, { order: order });
+```
+
+In the SiteGenesis reference template, you should inject this code to:
+
+`storefront_controllers/cartridge/controllers/COPlaceOrder.js:179`
