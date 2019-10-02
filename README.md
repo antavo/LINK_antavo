@@ -245,7 +245,7 @@ code snippet to your customer page.
 
 ```javascript
 <isinclude template="antavo/includes/profile/opt-in" />
-``
+```
 
 In the SiteGenesis reference template, you should inject this code to:
 
@@ -258,7 +258,7 @@ to your account page:
 
 ```javascript
 <isinclude template="antavo/includes/profile/opt-out" />
-``
+```
 
 In the SiteGenesis reference template, you should inject this code to:
 
