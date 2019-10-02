@@ -167,7 +167,6 @@ Just add a new entry to your `forms.properties` file, like:
 
 ```bash
 profile.loyalty_opt_in=I would like to join the loyalty program.
-profile.loyalty_terms_text=I accept the terms & conditions.
 ```
 
 In the SiteGenesis reference template, you should inject this code to:
@@ -181,6 +180,8 @@ translate to German, add a new locale entry to your `forms_de_DE.properties`, li
 profile.loyalty_optin=Ich möchte dem Treueprogramm beitreten.
 profile.loyalty_terms_text=Ich akzeptiere die Bedingungen.
 ```
+
+With special regards to GDPR, please put your terms & conditons page's link after the injected checkbox.
 
 ##### Sending opt-in event to Antavo's API
 
