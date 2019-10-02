@@ -189,12 +189,7 @@ will perform an API request to the Antavo Events API.
 var eventHandler = require("int_antavo/cartridge/scripts/events/Handler");
 eventHandler.Handler.fire(eventHandler.EVENT_AFTER_CUSTOMER_OPT_IN, this, {
     opt_in: app.getForm("profile").object.customer.loyaltyOptIn.getValue(),
-    customer: {
-        id: profileValidation.ID,
-        email: profileValidation.profile.email,
-        first_name: profileValidation.profile.firstName,
-        last_name: profileValidation.profile.lastName,
-    },
+    customer: profileValidation || customer,
 });
 ```
 
