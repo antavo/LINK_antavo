@@ -243,7 +243,7 @@ In the SiteGenesis reference template, you should inject this code to:
 If you want to place an "Opt-in" button for your existing customer, inject the following
 code snippet to your customer page.
 
-```javascript
+```html
 <isinclude template="antavo/includes/profile/opt-in" />
 ```
 
@@ -256,10 +256,34 @@ In the SiteGenesis reference template, you should inject this code to:
 For be able to opt-out from the Loyalty Program, inject the following code snippet
 to your account page:
 
-```javascript
+```html
 <isinclude template="antavo/includes/profile/opt-out" />
 ```
 
 In the SiteGenesis reference template, you should inject this code to:
 
 `storefront_core/cartridge/templates/default/account/user/registration.isml:112`
+
+#### Showing customer information on the storefront
+
+If you want to show a specific loyalty information about the customer on the storefront,
+just place a new HTML tag to your template in the following format:
+
+```html
+<span data-antavo-field-*></span>
+```
+
+Where the * can be:
+
+* level
+* score
+* spent
+* spendable
+* reserved
+* pending
+
+For example:
+
+```html
+<p data-antavo-field-pending></p>
+```
