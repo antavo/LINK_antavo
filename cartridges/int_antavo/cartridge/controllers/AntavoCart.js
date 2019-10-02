@@ -2,9 +2,9 @@
  * 
  */
 
-var Template = require("bm_antavo/cartridge/scripts/utils/template");
+var Template = require("bm_antavo/cartridge/scripts/utils/Template");
 var Logger = require("dw/system/Logger");
-var Exception = require("~/cartridge/scripts/client/exception");
+var Exception = require("~/cartridge/scripts/client/Exception");
 var URLUtils = require("dw/web/URLUtils");
 
 /**

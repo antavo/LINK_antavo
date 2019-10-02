@@ -1,3 +1,7 @@
+/**
+ * 
+ */
+
 var transaction = require('dw/system/Transaction');
 var Site = require('dw/system/Site');
 var CustomObjectManager = require("dw/object/CustomObjectMgr");

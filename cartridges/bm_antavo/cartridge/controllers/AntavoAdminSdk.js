@@ -1,7 +1,7 @@
-var TemplateHelper = require('~/cartridge/scripts/utils/template');
+var TemplateHelper = require('~/cartridge/scripts/utils/Template');
 var URLUtils = require('dw/web/URLUtils');
-var ConfigHelper = require('~/cartridge/scripts/utils/config');
-var FlashMessageHelper = require('~/cartridge/scripts/utils/flashMessage');
+var ConfigHelper = require('~/cartridge/scripts/utils/Config');
+var FlashMessageHelper = require('~/cartridge/scripts/utils/FlashMessage');
 
 /**
  *

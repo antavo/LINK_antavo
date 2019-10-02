@@ -2,12 +2,12 @@
  * Class to calculate signatures Escher v4 signatures.
  */
 
-var Utils = require("~/cartridge/scripts/utils");
+var Utils = require("~/cartridge/scripts/Utils");
 var Mac = require("dw/crypto/Mac");
 var MessageDigest = require("dw/crypto/MessageDigest");
 var Bytes = require("dw/util/Bytes");
 var Encoding = require("dw/crypto/Encoding");
-var Request = require("~/cartridge/scripts/client/request");
+var Request = require("~/cartridge/scripts/client/Request");
 
 /**
  * @param {String} region  Region to use when sending request.

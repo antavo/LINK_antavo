@@ -2,7 +2,7 @@
  * 
  */
 
-var ConfigHelper = require('bm_antavo/cartridge/scripts/utils/config');
+var ConfigHelper = require('bm_antavo/cartridge/scripts/utils/Config');
 var URLUtils = require('dw/web/URLUtils');
 
 /**

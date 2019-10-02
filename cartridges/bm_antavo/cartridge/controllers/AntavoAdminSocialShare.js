@@ -1,6 +1,7 @@
-var TemplateHelper = require('~/cartridge/scripts/utils/template');
-var ConfigHelper = require('~/cartridge/scripts/utils/config');
+var TemplateHelper = require('~/cartridge/scripts/utils/Template');
+var ConfigHelper = require('~/cartridge/scripts/utils/Config');
 var URLUtils = require('dw/web/URLUtils');
+
 /**
  * 
  */

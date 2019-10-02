@@ -1,7 +1,7 @@
 var ISML = require('dw/template/ISML');
 var ServiceRegistry = require('dw/svc/ServiceRegistry');
 var HttpService = ServiceRegistry.get('antavo.http');
-var config = require('bm_antavo/cartridge/scripts/utils/config');
+var config = require('bm_antavo/cartridge/scripts/utils/Config');
 
 /**
  * @returns {Object}

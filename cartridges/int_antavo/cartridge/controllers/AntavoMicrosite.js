@@ -1,6 +1,6 @@
-var Template = require("bm_antavo/cartridge/scripts/utils/template");
+var Template = require("bm_antavo/cartridge/scripts/utils/Template");
 var guard = require("*/cartridge/scripts/guard");
-var Config = require("bm_antavo/cartridge/scripts/utils/config");
+var Config = require("bm_antavo/cartridge/scripts/utils/Config");
 
 /**
  * Displays a microsite page in an iFrame with the default layout

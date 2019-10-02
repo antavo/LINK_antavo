@@ -1,8 +1,12 @@
+/**
+ * 
+ */ 
+
 var ISML = require('dw/template/ISML');
 var guard = require('*/cartridge/scripts/guard');
-var client = require('~/cartridge/scripts/client');
-var utils = require('~/cartridge/scripts/utils');
-var Signer = require('~/cartridge/scripts/client/signature').Signer;
+var client = require('~/cartridge/scripts/Client');
+var utils = require('~/cartridge/scripts/Utils');
+var Signer = require('~/cartridge/scripts/client/Signature').Signer;
 
 function renderJson(data) {
     response.setContentType('application/json');

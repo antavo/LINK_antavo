@@ -3,12 +3,12 @@
  */
 
 var ServiceRegistry = require('dw/svc/ServiceRegistry');
-var ExceptionHelper = require('~/cartridge/scripts/client/exception');
-var Request = require('~/cartridge/scripts/client/request');
-var ResponseHelper = require('~/cartridge/scripts/client/response');
+var ExceptionHelper = require('~/cartridge/scripts/client/Exception');
+var Request = require('~/cartridge/scripts/client/Request');
+var ResponseHelper = require('~/cartridge/scripts/client/Response');
 var HttpService = ServiceRegistry.get('antavo.http');
-var Utils = require('~/cartridge/scripts/utils');
-var Signature = require("int_antavo/cartridge/scripts/client/signature");
+var Utils = require('~/cartridge/scripts/Utils');
+var Signature = require("int_antavo/cartridge/scripts/client/Signature");
 var Mac = require("dw/crypto/Mac");
 var Encoding = require("dw/crypto/Encoding");
 

@@ -1,3 +1,15 @@
+/**
+ * Utility helper to format a local time/date. 
+ */
+
+/**
+ * Returns a string formatted according to the given format string using the 
+ * given integer timestamp or the current time if no timestamp is given.
+ * 
+ * @param {String} format  The format of the outputted date string.
+ * @param {Number} timestamp  The optional timestamp parameter is an integer Unix timestamp that defaults to the current local time if a timestamp is not given.
+ * @returns {String}
+ */
 function date(format, timestamp) {
     var jsdate, f;
     // Keep this here (works, but for code commented-out below for file size reasons)

@@ -3,31 +3,81 @@
  */
 
 var Client = require("~/cartridge/scripts/Client");
-var Exception = require('~/cartridge/scripts/client/exception');
+var Exception = require('~/cartridge/scripts/client/Exception');
 var Logger = require("dw/system/Logger");
+var URLUtils = require("dw/web/URLUtils");
+var template = require("bm_antavo/cartridge/scripts/utils/Template");
 
 exports.Handler = function () {
     /**
      * @var {Number}
      */
-    const ERR_INVALID_PAYLOAD = 330101;
+    const ERR_INVALID_PAYLOAD = 330201;
     
     /**
-     * 
+     * @param {Object} order
+     */
+    this.createDefaultCheckoutData = function (order) {
+        return {
+            total: 0,
+            transaction_id: order.UUID,
+            currency: order.currencyCode,
+            items: [],
+            discount: 0,
+            shipping: order.shippingTotalGrossPrice.value,
+        };
+    }
+    
+    /**
+     * @param {Object} order
+     * @returns {Object}
+     */
+    this.exportLineItemData = function (lineItem) {
+        var subtotal = lineItem.price.value,
+            adjustedSubtotal = lineItem.adjustedPrice.value
+            discount = subtotal - adjustedSubtotal,
+            quantity = lineItem.quantity.value;
+        
+        return {
+            product_id: lineItem.productID,
+            product_name: lineItem.productName,
+            product_url: URLUtils.https('Product-Show', 'pid', lineItem.productID).toString(),
+            price: subtotal / quantity,
+            discount: discount,
+            subtotal: adjustedSubtotal,
+            sku: lineItem.manufacturerSKU,
+            quantity: quantity,
+            product_category: "",
+        };
+    }
+    
+    /**
+     * @param {Object} source
+     * @param {Object=} data
      */
     this.handle = function (source, data) {
         try {
-            if (!data || !data.checkout) {
+            if (!data || !data.order) {
                 throw Exception.createException(
-                    "Missing checkout from payload", 
+                    "Missing order from payload", 
                     ERR_INVALID_PAYLOAD
                 ); 
             }
+
+            var order = data.order,
+                lineItems = order.getAllProductLineItems(),
+                request = this.createDefaultCheckoutData(order);
             
-            Client.sendEvent(data.checkout.customer, "checkout", data.checkout);
+            for (var i in lineItems) {
+                var lineItemData = this.exportLineItemData(lineItems[i].orderItem.lineItem);
+                request["items"].push(lineItemData);
+                request["discount"] += lineItemData.discount;
+                request["total"] += lineItemData.subtotal;
+            }
+            
+            Client.sendEvent(order.customer.ID, "checkout", request);
         } catch (e) {
             Logger.warn(e.message);
         }
     }
 };
-

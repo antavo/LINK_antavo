@@ -2,7 +2,7 @@
  * 
  */
 
-var DateHelper = require('~/cartridge/scripts/date');
+var DateHelper = require("~/cartridge/scripts/Date");
 
 /**
  * Equivalent implementation of the https://www.php.net/manual/en/function.array-change-key-case.php
@@ -15,8 +15,8 @@ function arrayChangeKeyCase(obj, cs) {
     var key;
     var result = {};
 
-    if (obj && typeof obj === 'object') {
-        caseFnc = (!cs || cs === 'CASE_LOWER') ? 'toLowerCase' : 'toUpperCase';
+    if (obj && typeof obj === "object") {
+        caseFnc = (!cs || cs === "CASE_LOWER") ? "toLowerCase" : "toUpperCase";
         
         for (key in obj) {
             result[key[caseFnc]()] = obj[key];
@@ -34,7 +34,7 @@ function arrayChangeKeyCase(obj, cs) {
  * @param {Object} obj
  * @returns {Object}
  */
-function ksort(obj){
+function ksort(obj) {
     var keys = Object.keys(obj).sort();
     var sorted = {};
 
@@ -46,26 +46,26 @@ function ksort(obj){
 }
 
 /**
- * @param {String} str
+ * @param {String} str  The URL to parse. Invalid characters are replaced by _.
  * @param {String} component
  * @returns {Object}
  */
 function parseUrl(str, component) {
     var key = [
-      'source',
-      'scheme',
-      'authority',
-      'userInfo',
-      'user',
-      'pass',
-      'host',
-      'port',
-      'relative',
-      'path',
-      'directory',
-      'file',
-      'query',
-      'fragment',
+      "source",
+      "scheme",
+      "authority",
+      "userInfo",
+      "user",
+      "pass",
+      "host",
+      "port",
+      "relative",
+      "path",
+      "directory",
+      "file",
+      "query",
+      "fragment",
     ];
     var regex = new RegExp([
         '(?:([^:\\/?#]+):)?',
@@ -92,12 +92,14 @@ function parseUrl(str, component) {
 }
 
 /**
- * @param {String} str
- * @param {Object} array
- * @returns
+ * Parses encoded_string as if it were the query string passed via a URL and sets variables 
+ * in the current scope (or in the array if result is provided).
+ * 
+ * @param {String} str  The input string.
+ * @returns {Object}
  */
 function parseStr(str) {
-    var strArr = String(str).replace(/^&/, '').replace(/&$/, '').split('&');
+    var strArr = String(str).replace(/^&/, "").replace(/&$/, "").split("&");
     var sal = strArr.length;
     var i;
     var j;
@@ -174,7 +176,7 @@ function parseStr(str) {
             obj = array;
 
             for (j = 0, keysLen = keys.length; j < keysLen; j++) {
-                key = keys[j].replace(/^['"]/, '').replace(/['"]$/, '');
+                key = keys[j].replace(/^['"]/, "").replace(/['"]$/, "");
                 lastObj = obj;
 
                 if ((key === '' || key === ' ') && j !== 0) {
@@ -208,10 +210,12 @@ function parseStr(str) {
 }
 
 /**
- * @param formdata
- * @param numericPrefix
- * @param argSeparator
- * @returns
+ * Generates a URL-encoded query string from the associative (or indexed) array provided.
+ * 
+ * @param {Object} formdata  May be an array or object containing properties.
+ * @param {String} numericPrefix  It will be prepended to the numeric index for elements in the base array only.
+ * @param {String} argSeparator  Used to separate arguments but may be overridden by specifying this parameter.
+ * @returns {String}  Returns a URL-encoded string.
  */
 function httpBuildQuery(formdata, numericPrefix, argSeparator) {
     var value;
@@ -229,10 +233,10 @@ function httpBuildQuery(formdata, numericPrefix, argSeparator) {
         }
         
         if (val !== null) {
-            if (typeof val === 'object') {
+            if (typeof val === "object") {
                 for (k in val) {
                     if (val[k] !== null) {
-                        tmp.push(_httpBuildQueryHelper(key + '[' + k + ']', val[k], argSeparator));
+                        tmp.push(_httpBuildQueryHelper(key + "[" + k + "]", val[k], argSeparator));
                     }
                 }
                 
@@ -240,7 +244,7 @@ function httpBuildQuery(formdata, numericPrefix, argSeparator) {
             } else if (typeof val !== 'function') {
                 return urlencode(key) + '=' + urlencode(val);
             } else {
-                throw new Error('There was an error processing for http_build_query().');
+                throw new Error("There was an error processing for http_build_query().");
             }
         } else {
             return '';
@@ -248,7 +252,7 @@ function httpBuildQuery(formdata, numericPrefix, argSeparator) {
     }
 
     if (!argSeparator) {
-        argSeparator = '&';
+        argSeparator = "&";
     }
     
     for (key in formdata) {
@@ -260,7 +264,7 @@ function httpBuildQuery(formdata, numericPrefix, argSeparator) {
         
         var query = _httpBuildQueryHelper(key, value, argSeparator);
         
-        if (query !== '') {
+        if (query !== "") {
             tmp.push(query);
         }
     }
@@ -269,7 +273,10 @@ function httpBuildQuery(formdata, numericPrefix, argSeparator) {
 }
 
 /**
- * @param {String} str
+ * This function is convenient when encoding a string to be used in a query part of a 
+ * URL, as a convenient way to pass variables to the next page.
+ * 
+ * @param {String} str  The string to be encoded.
  * @returns {String}
  */ 
 function urlencode(str) {
@@ -285,9 +292,11 @@ function urlencode(str) {
 }
 
 /**
- * @param {String} format
- * @param {Number} timestamp
- * @returns {String}
+ * Format a GMT/UTC date/time.
+ * 
+ * @param {String} format  The format of the outputted date string.
+ * @param {Number} timestamp  The optional timestamp parameter is an integer Unix timestamp.
+ * @returns {String}  Returns a formatted date string.
  */
 function gmdate(format, timestamp) {    
     var dt = typeof timestamp === 'undefined' ? new Date() // Not provided
