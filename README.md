@@ -166,7 +166,8 @@ You can translate the opt-in checkbox's label through the default Demandware loc
 Just add a new entry to your `forms.properties` file, like:
 
 ```bash
-profile.loyalty_optin=By checking this box you will accept to join our loyalty program
+profile.loyalty_opt_in=I would like to join the loyalty program.
+profile.loyalty_terms_text=I accept the terms & conditions.
 ```
 
 In the SiteGenesis reference template, you should inject this code to:
@@ -177,7 +178,8 @@ You can translate the checkbox text to other languages. For example, if you want
 translate to German, add a new locale entry to your `forms_de_DE.properties`, like:
 
 ```bash
-profile.loyalty_optin=Wenn Sie dieses Kästchen markieren, akzeptieren Sie, an unserem Treueprogramm teilzunehmen
+profile.loyalty_optin=Ich möchte dem Treueprogramm beitreten.
+profile.loyalty_terms_text=Ich akzeptiere die Bedingungen.
 ```
 
 ##### Sending opt-in event to Antavo's API
