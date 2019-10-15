@@ -152,7 +152,7 @@ Add these lines to your registration template:
 
 ```html
 <isif condition="${!(customer.authenticated && customer.registered)}">
-	<isinputfield formfield="${pdict.CurrentForms.profile.customer.loyalty_optin}" type="checkbox"/>
+	<isinputfield formfield="${pdict.CurrentForms.profile.customer.loyalty_optin}" type="checkbox" />
 </isif>
 ```
 
@@ -166,7 +166,7 @@ You can translate the opt-in checkbox's label through the default Demandware loc
 Just add a new entry to your `forms.properties` file, like:
 
 ```bash
-profile.loyalty_optin=By checking this box you will accept to join our loyalty program
+profile.loyalty_opt_in=I would like to join the loyalty program.
 ```
 
 In the SiteGenesis reference template, you should inject this code to:
@@ -177,8 +177,11 @@ You can translate the checkbox text to other languages. For example, if you want
 translate to German, add a new locale entry to your `forms_de_DE.properties`, like:
 
 ```bash
-profile.loyalty_optin=Wenn Sie dieses Kästchen markieren, akzeptieren Sie, an unserem Treueprogramm teilzunehmen
+profile.loyalty_optin=Ich möchte dem Treueprogramm beitreten.
+profile.loyalty_terms_text=Ich akzeptiere die Bedingungen.
 ```
+
+With special regards to GDPR, please put your terms & conditons page's link after the injected checkbox.
 
 ##### Sending opt-in event to Antavo's API
 
@@ -217,7 +220,7 @@ If you want to show the summarized amount of the incentivizing points on the car
 you should place the following code snippet to your cart partial:
 
 ```html
-<isinclude url="${URLUtils.url('AntavoCart-Include')}"/>
+<isinclude url="${URLUtils.url('AntavoCart-Include')}" />
 ```
 
 In the SiteGenesis reference template, you should inject this code to:
@@ -237,3 +240,53 @@ eventHandler.Handler.fire(eventHandler.EVENT_AFTER_CHECKOUT, this, { order: orde
 In the SiteGenesis reference template, you should inject this code to:
 
 `storefront_controllers/cartridge/controllers/COPlaceOrder.js:179`
+
+#### Showing the opt-in button for existing customers
+
+If you want to place an "Opt-in" button for your existing customer, inject the following
+code snippet to your customer page.
+
+```html
+<isinclude template="antavo/includes/profile/opt-in" />
+```
+
+In the SiteGenesis reference template, you should inject this code to:
+
+`storefront_core/cartridge/templates/default/account/user/registration.isml:80`
+
+#### Showing the opt-out button for loyalty members
+
+For be able to opt-out from the Loyalty Program, inject the following code snippet
+to your account page:
+
+```html
+<isinclude template="antavo/includes/profile/opt-out" />
+```
+
+In the SiteGenesis reference template, you should inject this code to:
+
+`storefront_core/cartridge/templates/default/account/user/registration.isml:112`
+
+#### Showing customer information on the storefront
+
+If you want to show a specific loyalty information about the customer on the storefront,
+just place a new HTML tag to your template in the following format:
+
+```html
+<span data-antavo-field-*></span>
+```
+
+Where the * can be:
+
+* level
+* score
+* spent
+* spendable
+* reserved
+* pending
+
+For example:
+
+```html
+<p data-antavo-field-pending></p>
+```
