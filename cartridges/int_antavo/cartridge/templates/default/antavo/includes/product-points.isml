@@ -1,7 +1,5 @@
 <div style="width: 100%; max-width: inherit;" class="extra-info">
-    <div class="antavo-points" data-product-id="${pdict.Product.ID}">
-    	${pdict.Product.categories.join(", ")}
-    </div>
+    <div class="antavo-points" data-product-id="${pdict.Product.ID}"></div>
 </div>
 
 <script>

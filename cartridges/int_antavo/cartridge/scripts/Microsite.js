@@ -10,7 +10,7 @@ var URLUtils = require('dw/web/URLUtils');
  */
 function getMicrositeUrl() {
     if (session.customer.isAuthenticated()) {
-        return URLUtils.https('AntavoMicrosite-Show');
+        return URLUtils.https('LoyaltyMicrosite-Show');
     }
     
     return '#';

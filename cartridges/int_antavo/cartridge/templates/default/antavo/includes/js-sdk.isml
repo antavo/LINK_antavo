@@ -6,6 +6,22 @@
 	<script type="text/javascript">
 		var onBrandUpdate = function () {
 		    document.dispatchEvent(new Event("antavo-brand-updated"));
+		    
+		    var customer = Antavo.SDK.getCustomer();
+		    
+		    if (customer) {
+		        var properties = ["level", "score", "spent", "spendable", "reserved", "pending"];
+			    
+			    for (var key in properties) {
+			        var property = properties[key];
+			        
+			        if (customer[property]) {
+			            document.querySelectorAll("[data-antavo-field-" + property + "]").forEach(function (element) {
+				            element.innerHTML = customer[property];
+				        });			            
+			        }
+			    }		        
+		    }
 		};
 	
 	    (function (t, u, c) {

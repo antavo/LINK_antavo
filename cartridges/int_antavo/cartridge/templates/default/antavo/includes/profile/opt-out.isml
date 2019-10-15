@@ -1,0 +1,14 @@
+<isif condition="${customer.authenticated && customer.registered && customer.profile.custom['loyaltyOptIn']}">
+	<form method="post" action="${URLUtils.url('LoyaltyMicrosite-OptOut')}" id=loyalty-opt-out>
+		<fieldset>
+			<legend>${Resource.msg('profile.opt_out_header', 'loyalty', null)}</legend>
+			
+			<p>${Resource.msgf('profile.opt_out_text', 'loyalty', null)}</p>
+			
+			<input type="hidden" name="redirect" value="${URLUtils.url('Account-EditProfile')}">
+			<button type="submit">
+				${Resource.msg('profile.opt_out_button', 'loyalty', null)}
+			</button>
+		</fieldset>
+	</form>
+</isif>

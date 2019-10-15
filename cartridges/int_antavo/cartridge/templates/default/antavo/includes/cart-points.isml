@@ -9,7 +9,7 @@
 
 	    $.ajax({
 	    	type: "GET",
-	        url: "${URLUtils.url('AntavoCart-Data')}",
+	        url: "${URLUtils.url('LoyaltyCart-Data')}",
 	        dataType: "json"
 	    }).success(function (data) {
 	        Antavo.Campaigns.calculateCampaignBonus(

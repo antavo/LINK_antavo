@@ -8,6 +8,11 @@
 const _EVENT_AFTER_CUSTOMER_OPT_IN = "afterCustomerOptIn";
 
 /**
+ * This event will be triggered right after a successful customer opt-in. 
+ */
+const _EVENT_AFTER_CUSTOMER_OPT_OUT = "afterCustomerOptOut";
+
+/**
  * This event will be emitted right after a successful checkout place.
  */
 const _EVENT_AFTER_CHECKOUT = "afterCheckout";
@@ -28,8 +33,10 @@ function Handler() {
 	 */
 	this.init = function () {
 		var OptInHandler = require("~/cartridge/scripts/events/handlers/OptInHandler").Handler;
+		var OptOutHandler = require("~/cartridge/scripts/events/handlers/OptOutHandler").Handler;
 		var CheckoutHandler = require("~/cartridge/scripts/events/handlers/CheckoutHandler").Handler;
 		this.attachHandler(_EVENT_AFTER_CUSTOMER_OPT_IN, new OptInHandler());
+		this.attachHandler(_EVENT_AFTER_CUSTOMER_OPT_OUT, new OptOutHandler());
 		this.attachHandler(_EVENT_AFTER_CHECKOUT, new CheckoutHandler());
 		return this;
 	}
@@ -69,7 +76,7 @@ function Handler() {
 			for (var priority in handlers) {
 				for (var i in handlers[priority]) {
 				    var handler = handlers[priority][i];
-		            
+				    
 					if (typeof handler === "object" && typeof handler["handle"] === "function") {
 						handler["handle"](source, data);
 					} else if (typeof handler === "function") {
@@ -99,4 +106,5 @@ exports.Handler = (function (object) {
 })(new Handler).getInstance();
 
 exports.EVENT_AFTER_CUSTOMER_OPT_IN = _EVENT_AFTER_CUSTOMER_OPT_IN;
+exports.EVENT_AFTER_CUSTOMER_OPT_OUT = _EVENT_AFTER_CUSTOMER_OPT_OUT;
 exports.EVENT_AFTER_CHECKOUT = _EVENT_AFTER_CHECKOUT;

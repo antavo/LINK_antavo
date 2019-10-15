@@ -1,3 +1,7 @@
+/**
+ * 
+ */
+
 var ISML = require('dw/template/ISML');
 var ServiceRegistry = require('dw/svc/ServiceRegistry');
 var HttpService = ServiceRegistry.get('antavo.http');
