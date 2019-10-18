@@ -48,58 +48,92 @@ function getRegion() {
 }
 
 /**
+ * @param {String} uri
+ * @param {String} method
+ * @param {Object=} data
+ * @returns {String}
+ */
+function getPreparedRequestUrl(method, uri, data) {
+    return Request.prepareUrl(
+        getApiUrl() + "/" + uri.replace(/^\//, ''), 
+        !Request.isBodyAllowed(method) ? data : null
+    );
+}
+
+/**
  * @param {String} method
  * @param {String} uri
  * @param {Object} data
  * @returns {Object}
+ */
+function createServiceConfiguration(method, uri, data) {
+    return {
+        /**
+         * @param {dw.svc.HTTPService} svc
+         * @param {Object=} params
+         */
+        createRequest: function (svc, params) {
+            var url = getPreparedRequestUrl(method, uri, data);
+            
+            if (Request.isBodyAllowed(method) && Object.keys(data).length) {
+                var payload = Utils.httpBuildQuery(data);
+            }
+            
+            svc.setURL(url);
+            svc.setRequestMethod(method);
+            svc.addHeader("Content-Type", "application/x-www-form-urlencoded; charset='UTF-8'");
+            svc.addHeader("User-Agent", "SFCC Client 19.10.1");
+            
+            var time = 1 * (new Date().getTime() / 1000).toFixed(0);
+            var signer = new Signature.Signer(getRegion(), getApiKey(), getApiSecret(), time);
+            svc.addHeader("Authorization", signer.getAuthorizationHeader(signer.calculateSignature(method, url, data)));
+            svc.addHeader("Date", Utils.gmdate("c", time));
+            svc.addHeader("Host", Utils.parseUrl(url, "host"));
+            
+            return payload || "";
+        },
+        
+        /**
+         * @param {dw.svc.HTTPService} svc
+         * @param {dw.net.HTTPClient} client
+         */
+        parseResponse: function (svc, client) {
+            return JSON.parse(client.text);
+        },
+    };
+}
+
+/**
+ * @param {String} method
+ * @param {String} uri
+ * @param {Object=} data
+ * @returns {Object}
  * @throws Exception  When the API response is malformed.
  */
 function send(method, uri, data) {
-    var httpClient = new dw.net.HTTPClient();
     data = data || {};
-    //data['api_key'] = getApiKey();
-    var url = Request.prepareUrl(
-        getApiUrl() + "/" + uri.replace(/^\//, ''), 
-        !Request.isBodyAllowed(method) ? data : null
-    );
-    httpClient.open(method, url);
-	// Adding the default request headers
-    httpClient.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset='UTF-8'");
-    httpClient.setRequestHeader("User-Agent", "SFCC Client 19.10.1");
     
-    if (Request.isBodyAllowed(method) && Object.keys(data).length) {
-        var payload = Utils.httpBuildQuery(data);
+    var registry = require("dw/svc/LocalServiceRegistry");
+    var service = registry.createService("antavo.http", createServiceConfiguration(method, uri, data));
+    
+    // Performing the API request
+    var result = service.call();
+    
+    if (result.OK != result.status) {
+        // TODO: exception code
+        throw ExceptionHelper.createException(result.errorMessage);
     }
     
-    // Adding the signature string
-    var time = 1 * (new Date().getTime() / 1000).toFixed(0);
-    var signer = new Signature.Signer(getRegion(), getApiKey(), getApiSecret(), time);
-    httpClient.setRequestHeader("Authorization", signer.getAuthorizationHeader(signer.calculateSignature(method, url, data)));
-    httpClient.setRequestHeader("Date", Utils.gmdate("c", time));
-    httpClient.setRequestHeader("Host", Utils.parseUrl(url, "host"));
+    var response = result.object;
     
-    // Set the request timeout to 3s
-    httpClient.setTimeout(3000);
-    // Performing the request
-    httpClient.send(Request.isBodyAllowed(method) ? payload : '');
-
-    // If the response status code is not 2xx, return
-    if (!ResponseHelper.isStatusAccepted(httpClient.statusCode)) {
-        var response = ResponseHelper.parseBody(
-            httpClient.errorText,
-            httpClient.getResponseHeader('Content-Type')
-        );
+    if (response.error) {
         throw ExceptionHelper.createException(
-            response.error.message, 
-            httpClient.statusCode
+            response.error.message,
+            response.error.code
         );
     }
-	
-    // Parsing the JSON response, then return
-    return ResponseHelper.parseBody(
-        httpClient.text, 
-        httpClient.getResponseHeader('Content-Type')
-    );
+    
+    return response;
 }
 
 /**
@@ -109,7 +143,7 @@ function send(method, uri, data) {
 function getCustomer(id) {
     return send(
         Request.METHOD_GET, 
-        '/customers/' + encodeURIComponent(id)
+        "/customers/" + encodeURIComponent(id)
     );
 }
 
@@ -120,10 +154,10 @@ function getCustomer(id) {
  * @returns {Object}
  */
 function sendEvent(customer, action, data) {
-    return send(Request.METHOD_POST, '/events', {
+    return send(Request.METHOD_POST, "/events", {
         customer: customer,
         action: action,
-        data: data
+        data: data,
     });
 }
 
