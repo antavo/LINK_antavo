@@ -1,0 +1,55 @@
+<isdecorate template="antavobm/utils/pt_default">
+	<isinclude template="antavobm/components/header" />
+	
+	<form class="panel panel-tabbed" action="${URLUtils.httpContinue()}" method="post">
+		<div class="panel-body">
+			<p class="install-entry">
+				HTTP Client: service registration
+				
+				<isif condition="${pdict.isHttpServiceCreated}">
+					<span class="label label-success pull-right">Passed</span>
+					
+					<iselse>
+						<span class="label label-danger pull-right">Error</span>
+					</iselse>
+				</isif>
+			</p>
+			
+			<p class="install-entry">
+				HTTP Client: credentials
+				
+				<isif condition="${pdict.isHttpServiceConfigured}">
+					<span class="label label-success pull-right">Passed</span>
+					
+					<iselse>
+						<span class="label label-danger pull-right">Error</span>
+					</iselse>
+				</isif>
+			</p>
+			
+			<p class="install-entry">
+				Custom Object: AntavoConfig object definition
+				
+				<isif condition="${pdict.isConfigObjectDefined}">
+					<span class="label label-success pull-right">Passed</span>
+					
+					<iselse>
+						<span class="label label-danger pull-right">Error</span>
+					</iselse>
+				</isif>
+			</p>
+			
+			<p class="install-entry">
+				Custom Object: AntavoRequestQueue object definition
+				
+				<isif condition="${pdict.isQueueObjectDefined}">
+					<span class="label label-success pull-right">Passed</span>
+					
+					<iselse>
+						<span class="label label-danger pull-right">Error</span>
+					</iselse>
+				</isif>
+			</p>
+		</div>
+	</form>
+</isdecorate>

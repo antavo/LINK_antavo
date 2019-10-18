@@ -34,6 +34,16 @@
 					</a>
 				</isif>
 			</td>
+			
+			<td class="${pdict.activeAntavoPage == 'install' ? 'w e n table_tabs_en_background' : 'e n s table_tabs_dis_background'}" nowrap="nowrap">
+				<isif condition="${pdict.activeAntavoPage == 'install'}">
+					${Resource.msg('install.title', 'antavobm', null)}
+				<iselse>
+					<a href="${URLUtils.https('AntavoAdminInstall-Show')}" class="table_tabs_dis">
+						${Resource.msg('install.title', 'antavobm', null)}
+					</a>
+				</isif>
+			</td>
 		</tr>
 	</tbody>
 </table>

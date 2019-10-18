@@ -5,7 +5,7 @@
 				name2="Online Marketing" 
 				url2="${URLUtils.https('SiteNavigationBar-ShowMenuitemOverview', 'CurrentMenuItemId', 'marketing')}" 
 				name3="Antavo Loyalty" 
-				url3="${URLUtils.https('AntavoSdk-Settings')}" 
+				url3="${URLUtils.https('AntavoAdminSdk-Settings')}" 
 				name4="${pdict.title}">
 
 <isinclude template="antavobm/components/menutabs">

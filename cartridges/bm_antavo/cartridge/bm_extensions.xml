@@ -21,6 +21,8 @@
 			<pipeline name="AntavoAdminMicrosite-ProcessSettings" />
 			<pipeline name="AntavoAdminSocialShare-Settings" />
 			<pipeline name="AntavoAdminSocialShare-ProcessSettings" />
+			
+			<pipeline name="AntavoAdminInstall-Show" />
 		</sub-pipelines>
 		<icon>antavobm/icons/antavo-favicon-32x32.png</icon>
 	</menuaction>

@@ -141,3 +141,43 @@
 	font-size: 12px;
 	display: block;
 }
+
+.antavo-content .panel-body + .panel-body {
+	border-top: 1px solid #ddd;
+}
+
+.antavo-content .install-entry {
+	font-size: 14px;
+	padding: 12px 6px;
+	border-bottom: 1px solid #ddd;
+	margin: 0;
+}
+
+.antavo-content div .install-entry:last-of-type {
+	border-bottom: 0;
+	margin: 0;
+}
+
+.antavo-content .label {
+	display: inline-block;
+    font-weight: 600;
+    padding: 2px 5px 2px 5px;
+    line-height: 1.5384616;
+    border: 1px solid transparent;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.1px;
+    border-radius: 2px;	
+}
+
+.antavo-content .label.label-success {
+	background: #4caf50;
+	border-color: #4caf50;
+	color: #fff;
+}
+
+.antavo-content .label.label-danger {
+	background: #f44336;
+	border-color: #f44336;
+	color: #fff;	
+}
