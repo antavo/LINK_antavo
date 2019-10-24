@@ -1,9 +1,13 @@
 /**
  * This handler object will be emitted automatically right after a customer opt-out.
+ * 
+ * @module int_antavo/scripts/events/handlers
  */
 
+"use strict"
+
 var Client = require("~/cartridge/scripts/Client");
-var Exception = require('~/cartridge/scripts/client/Exception');
+var Exception = require("~/cartridge/scripts/Exception");
 var Logger = require("dw/system/Logger");
 var Transaction = require("dw/system/Transaction");
 
@@ -38,7 +42,7 @@ exports.Handler = function () {
             
             // Saving the loyalty flag to the customer
             Transaction.wrap(function () {
-                customer.profile.custom['loyaltyOptIn'] = false;
+                customer.profile.custom["loyaltyOptIn"] = false;
             });
             
             // Sending API request to the Antavo API if the opt-in flag is true            

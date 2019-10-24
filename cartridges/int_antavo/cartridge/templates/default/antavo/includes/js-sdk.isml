@@ -2,7 +2,15 @@
 	Purpose: Load the Antavo Javascript SDK onto the website pages.
 </iscomment>
 
-<isif condition="${pdict.sdkUrl}">
+<isscript>
+	var config = require("int_antavo/cartridge/scripts/Config");
+	var sdkUrl = config.getSdkUrl();
+    var apiKey = config.getApiKey();
+    var config = config.getConfiguration();
+    var customerId = session.customer.getID();
+</isscript>
+
+<isif condition="${sdkUrl}">
 	<script type="text/javascript">
 		var onBrandUpdate = function () {
 		    document.dispatchEvent(new Event("antavo-brand-updated"));
@@ -16,8 +24,10 @@
 			        var property = properties[key];
 			        
 			        if (customer[property]) {
-			            document.querySelectorAll("[data-antavo-field-" + property + "]").forEach(function (element) {
-				            element.innerHTML = customer[property];
+			            document.querySelectorAll("[data-antavo-field='" + property + "']").forEach(function (element) {
+			                var prefix = element.getAttribute("data-antavo-field-prefix") || "", 
+			                	suffix = element.getAttribute("data-antavo-field-suffix") || "";
+				            element.innerHTML = prefix + customer[property] + suffix;
 				        });			            
 			        }
 			    }		        
@@ -31,14 +41,14 @@
 	        }
 	        o.src = u;
 	        s.parentNode.insertBefore(o, s);
-	    }("script", "${pdict.sdkUrl}", function () {
+	    }("script", "${sdkUrl}", function () {
 	        Antavo.SDK.init(
-	            "${pdict.apiKey}",
-	            "${pdict.customerId}",
+	            "${apiKey}",
+	            "${customerId}",
 	            {
 	                auth: {
-	                    method: "${pdict.config.sdk_authentication_method}",
-	                    cookie: 'cookie' == "${pdict.config.sdk_authentication_method}",
+	                    method: "${config.sdk_authentication_method}",
+	                    cookie: 'cookie' == "${config.sdk_authentication_method}",
 	                },
 	                video: {
 	                    enabled: true,
@@ -50,10 +60,10 @@
 	                    enabled: false,
 	                },
 	                socialShare: {
-	                    enabled: ${pdict.config.social_share_enabled || 1},
+	                    enabled: ${config.social_share_enabled || 1},
 	                },
 	                tracking: {
-	                    hashMethod: "${pdict.config.sdk_hashing_method}",
+	                    hashMethod: "${config.sdk_hashing_method}",
 	                },
 	            },
 	            onBrandUpdate,

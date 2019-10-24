@@ -1,6 +1,8 @@
 /**
- * 
+ * @module int_antavo/scripts
  */
+
+"use strict"
 
 var DateHelper = require("~/cartridge/scripts/Date");
 

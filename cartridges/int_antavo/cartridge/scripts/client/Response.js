@@ -1,6 +1,10 @@
 /**
  * Class to validate and parse Antavo API responses.
+ * 
+ * @module int_antavo/scripts/client
  */
+
+"use strict"
 
 /**
  * @param {Number} statusCode  The response's HTTP status code.
@@ -28,12 +32,12 @@ function parseJsonBody(result) {
  * @returns {Object}  The derived Javascript object from the response.
  */
 function parseBody(body, contentType) {
-    if (typeof contentType !== 'string') {
+    if (typeof contentType !== "string") {
         return body;
     }
 
     switch (contentType.split(';')[0]) {
-        case 'application/json':
+        case "application/json":
             return parseJsonBody(body);
         default:
             return body;

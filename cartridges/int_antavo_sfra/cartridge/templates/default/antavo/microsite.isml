@@ -1,0 +1,13 @@
+<iscomment>
+	Purpose: Embedding the brand's Microsite onto the website pages.
+</iscomment>
+
+<isdecorate template="${pdict.micrositeTemplate}">
+	<isif condition="${pdict.micrositeUrl}">
+		<iframe src="${pdict.micrositeUrl}" style="width: 100%; height: 600px; border: 0" id="loyalty-center-frame"></iframe>
+	<iselse>
+		<iscomment>
+			The microsite URL is not configured yet
+		</iscomment>
+	</isif>
+</isdecorate>

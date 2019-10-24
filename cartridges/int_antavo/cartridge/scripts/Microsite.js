@@ -1,8 +1,9 @@
 /**
- * 
+ * @module int_antavo/scripts 
  */
 
-var ConfigHelper = require('bm_antavo/cartridge/scripts/utils/Config');
+"use strict"
+
 var URLUtils = require('dw/web/URLUtils');
 
 /**
@@ -10,11 +11,10 @@ var URLUtils = require('dw/web/URLUtils');
  */
 function getMicrositeUrl() {
     if (session.customer.isAuthenticated()) {
-        return URLUtils.https('LoyaltyMicrosite-Show');
+        return URLUtils.https("LoyaltyMicrosite-Show");
     }
     
-    return '#';
-     
+    return "#";
 }
 
 exports.getMicrositeUrl = getMicrositeUrl;

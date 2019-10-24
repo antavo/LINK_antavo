@@ -1,6 +1,10 @@
 /**
  * Class to calculate signatures Escher v4 signatures.
+ * 
+ * @module int_antavo/scripts/client
  */
+
+"use strict"
 
 var Utils = require("~/cartridge/scripts/Utils");
 var Mac = require("dw/crypto/Mac");

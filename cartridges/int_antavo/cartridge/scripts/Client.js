@@ -1,16 +1,21 @@
 /**
- * Class to perform operations on an arbitrary Antavo API. 
+ * Class to perform operations on an arbitrary Antavo API.
+ * 
+ * @module int_antavo/scripts
  */
 
-var ServiceRegistry = require('dw/svc/ServiceRegistry');
-var ExceptionHelper = require('~/cartridge/scripts/client/Exception');
-var Request = require('~/cartridge/scripts/client/Request');
-var ResponseHelper = require('~/cartridge/scripts/client/Response');
-var HttpService = ServiceRegistry.get('antavo.http');
-var Utils = require('~/cartridge/scripts/Utils');
+"use strict"
+
+var ServiceRegistry = require("dw/svc/ServiceRegistry");
+var ExceptionHelper = require("~/cartridge/scripts/Exception");
+var Request = require("~/cartridge/scripts/client/Request");
+var ResponseHelper = require("~/cartridge/scripts/client/Response");
+var HttpService = ServiceRegistry.get("antavo.http");
+var Utils = require("~/cartridge/scripts/Utils");
 var Signature = require("int_antavo/cartridge/scripts/client/Signature");
 var Mac = require("dw/crypto/Mac");
 var Encoding = require("dw/crypto/Encoding");
+var Logger = require("dw/system/Logger");
 
 /**
  * @returns {Object}
@@ -55,7 +60,7 @@ function getRegion() {
  */
 function getPreparedRequestUrl(method, uri, data) {
     return Request.prepareUrl(
-        getApiUrl() + "/" + uri.replace(/^\//, ''), 
+        getApiUrl() + "/" + uri.replace(/^\//, ""), 
         !Request.isBodyAllowed(method) ? data : null
     );
 }
@@ -108,32 +113,35 @@ function createServiceConfiguration(method, uri, data) {
  * @param {String} uri
  * @param {Object=} data
  * @returns {Object}
- * @throws Exception  When the API response is malformed.
  */
 function send(method, uri, data) {
-    data = data || {};
-    
-    var registry = require("dw/svc/LocalServiceRegistry");
-    var service = registry.createService("antavo.http", createServiceConfiguration(method, uri, data));
-    
-    // Performing the API request
-    var result = service.call();
-    
-    if (result.OK != result.status) {
-        // TODO: exception code
-        throw ExceptionHelper.createException(result.errorMessage);
+    try {
+        data = data || {};
+        
+        var registry = require("dw/svc/LocalServiceRegistry");
+        var service = registry.createService("antavo.http", createServiceConfiguration(method, uri, data));
+        
+        // Performing the API request
+        var result = service.call();
+        
+        if (result.OK != result.status) {
+            // TODO: exception code
+            throw ExceptionHelper.createException(result.errorMessage);
+        }
+        
+        var response = result.object;
+        
+        if (response.error) {
+            throw ExceptionHelper.createException(
+                response.error.message,
+                response.error.code
+            );
+        }
+        
+        return response;
+    } catch (e) {
+        Logger.warn(JSON.stringify(e));
     }
-    
-    var response = result.object;
-    
-    if (response.error) {
-        throw ExceptionHelper.createException(
-            response.error.message,
-            response.error.code
-        );
-    }
-    
-    return response;
 }
 
 /**

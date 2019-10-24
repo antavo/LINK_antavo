@@ -1,16 +1,22 @@
-var TemplateHelper = require('~/cartridge/scripts/utils/Template');
-var URLUtils = require('dw/web/URLUtils');
-var ConfigHelper = require('~/cartridge/scripts/utils/Config');
-var FlashMessageHelper = require('~/cartridge/scripts/utils/FlashMessage');
+/**
+ * @module bm_antavo/controllers
+ */
+
+"use strict"
+
+var TemplateHelper = require("int_antavo/cartridge/scripts/Template");
+var URLUtils = require("dw/web/URLUtils");
+var ConfigHelper = require("int_antavo/cartridge/scripts/Config");
+var FlashMessageHelper = require("~/cartridge/scripts/FlashMessage");
 
 /**
  *
  */
 function settings() {
-    TemplateHelper.render('antavobm/sdk/settings', {
+    TemplateHelper.render("antavobm/sdk/settings", {
         ContinueURL: URLUtils.https("AntavoAdminSdk-ProcessSettings"),
-        activeAntavoPage: 'sdk',
-        title: 'JS SDK Settings',
+        activeAntavoPage: "sdk",
+        title: "JS SDK Settings",
         config: ConfigHelper.get(),
     });
 }
@@ -30,7 +36,7 @@ function processSettings() {
     } catch (e) {
         // TODO: [pjtuxe@2019-05-16] Error message
     } finally {
-        response.redirect(URLUtils.https('AntavoAdminSdk-Settings'));
+        response.redirect(URLUtils.https("AntavoAdminSdk-Settings"));
     }
 }
 

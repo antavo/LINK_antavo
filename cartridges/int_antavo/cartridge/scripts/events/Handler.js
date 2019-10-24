@@ -1,6 +1,8 @@
 /**
- * 
+ * @module int_antavo/scripts/events
  */
+
+"use strict"
 
 /**
  * This event will be triggered right after a successful customer opt-in. 

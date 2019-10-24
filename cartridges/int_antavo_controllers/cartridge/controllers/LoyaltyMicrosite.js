@@ -2,9 +2,11 @@
  * Default Microsite controller.
  */ 
 
-var Template = require("bm_antavo/cartridge/scripts/utils/Template");
+"use strict"
+
+var Template = require("int_antavo/cartridge/scripts/Template");
 var guard = require("*/cartridge/scripts/guard");
-var Config = require("bm_antavo/cartridge/scripts/utils/Config");
+var Config = require("int_antavo/cartridge/scripts/Config");
 var Transaction = require("dw/system/Transaction");
 
 /**

@@ -2,6 +2,13 @@
     <div class="antavo-points" data-product-id="${pdict.Product.ID}"></div>
 </div>
 
+<isscript>
+	var productHelper = require("int_antavo_controllers/cartridge/scripts/Product");
+	var categories = productHelper.getProductCategoryNames(pdict.Product);
+	var price = productHelper.getProductPrice(pdict.Product);
+	var url = productHelper.getProductUrl(pdict.Product.ID);
+</isscript>
+
 <script>
 	document.addEventListener("antavo-brand-updated", function () {
 	    Antavo.IncentivizedPurchase.init();
@@ -9,16 +16,16 @@
 
         Antavo.Campaigns.calculateCampaignBonus(
             {
-                total: ${pdict.Product.getPriceModel().getPrice().getValue()},
+                total: ${price},
                 transaction_id: "fake_transaction",
                 items: [{
                     product_id: "${pdict.Product.ID}",
                     product_name: "${pdict.Product.name}",
-                    product_url: "${URLUtils.https('Product-Show', 'pid', pdict.Product.ID, 'cgid', pdict.CurrentHttpParameterMap.cgid)}",
+                    product_url: "${url}",
                     quantity: 1,
-                    subtotal: ${pdict.Product.getPriceModel().getPrice().getValue()},
+                    subtotal: ${price},
                     sku: "${pdict.Product.manufacturerSKU || ""}",
-                    product_category: "${pdict.Product.getAllCategories().length}",
+                    product_category: "${categories.join(",")}",
                 }],
             },
             function (messages) {

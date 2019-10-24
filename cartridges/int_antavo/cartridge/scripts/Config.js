@@ -1,12 +1,14 @@
 /**
- * 
+ * @module int_antavo/scripts
  */
 
-var transaction = require('dw/system/Transaction');
-var Site = require('dw/system/Site');
+"use strict"
+
+var transaction = require("dw/system/Transaction");
+var Site = require("dw/system/Site");
 var CustomObjectManager = require("dw/object/CustomObjectMgr");
-var ServiceRegistry = require('dw/svc/ServiceRegistry');
-var HttpService = ServiceRegistry.get('antavo.http');
+var ServiceRegistry = require("dw/svc/ServiceRegistry");
+var HttpService = ServiceRegistry.get("antavo.http");
 
 /**
  * @returns {String}
@@ -23,7 +25,7 @@ function get() {
     
     transaction.wrap(function () {
         config = CustomObjectManager.getCustomObject(
-            'AntavoConfig',
+            "AntavoConfig",
             getCurrentSiteId()
         );
     });
@@ -47,7 +49,7 @@ function save(data) {
             }
         } catch (e) {
             config = CustomObjectManager.createCustomObject(
-                'AntavoConfig', 
+                "AntavoConfig", 
                 getCurrentSiteId()
             );
         }
@@ -74,7 +76,22 @@ function getApiKey() {
     return HttpService.getConfiguration().getCredential().getUser();
 }
 
+/**
+ * @returns {Object}
+ */
+function getConfiguration() {
+    return get().getCustom();
+}
+
+/**
+ * @returns {String}
+ */
+function getSdkUrl() {
+    return getConfiguration().sdk_url;
+}
+
 exports.get = get;
 exports.save = save;
 exports.getApiKey = getApiKey;
-
+exports.getConfiguration = getConfiguration;
+exports.getSdkUrl = getSdkUrl;

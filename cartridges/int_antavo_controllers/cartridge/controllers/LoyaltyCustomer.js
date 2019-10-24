@@ -1,13 +1,13 @@
 /**
- * @module  controllers/LoyaltyCustomer
+ * @module int_antavo_controllers/controllers
  */
 
-'use strict';
+"use strict";
 
-var Config = require("bm_antavo/cartridge/scripts/utils/Config");
-var Exception = require("~/cartridge/scripts/client/Exception");
+var Config = require("int_antavo/cartridge/scripts/Config");
+var Exception = require("~/cartridge/scripts/Exception");
 var guard = require("*/cartridge/scripts/guard");
-var Template = require("bm_antavo/cartridge/scripts/utils/Template");
+var Template = require("int_antavo/cartridge/scripts/Template");
 var Transaction = require("dw/system/Transaction");
 
 /**

@@ -1,15 +1,21 @@
-var TemplateHelper = require('~/cartridge/scripts/utils/Template');
-var ConfigHelper = require('~/cartridge/scripts/utils/Config');
-var URLUtils = require('dw/web/URLUtils');
+/**
+ * @module bm_antavo/controllers
+ */
+
+"use strict"
+
+var TemplateHelper = require("int_antavo/cartridge/scripts/Template");
+var ConfigHelper = require("int_antavo/cartridge/scripts/Config");
+var URLUtils = require("dw/web/URLUtils");
 
 /**
  * 
  */
 function settings() {
-    TemplateHelper.render('antavobm/microsite/settings', {
+    TemplateHelper.render("antavobm/microsite/settings", {
         ContinueURL: URLUtils.https("AntavoAdminMicrosite-ProcessSettings"),
-        activeAntavoPage: 'microsite',
-        title: 'Microsite Configuration',
+        activeAntavoPage: "microsite",
+        title: "Microsite Configuration",
         config: ConfigHelper.get(),
     });
 }
@@ -28,11 +34,11 @@ function processSettings() {
    } catch (e) {
        // TODO: [pjtuxe@2019-05-16] Error message
    } finally {
-       response.redirect(URLUtils.https('AntavoAdminMicrosite-Settings'));
+       response.redirect(URLUtils.https("AntavoAdminMicrosite-Settings"));
    }
 }
 
-settings.public = true;
-processSettings.public = true;
 exports.Settings = settings;
+exports.Settings.public = true;
 exports.ProcessSettings = processSettings;
+exports.ProcessSettings.public = true;

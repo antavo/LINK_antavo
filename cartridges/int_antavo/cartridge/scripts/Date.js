@@ -1,6 +1,10 @@
 /**
- * Utility helper to format a local time/date. 
+ * Utility helper to format a local time/date.
+ * 
+ * @module int_antavo/scripts
  */
+
+"use strict"
 
 /**
  * Returns a string formatted according to the given format string using the 

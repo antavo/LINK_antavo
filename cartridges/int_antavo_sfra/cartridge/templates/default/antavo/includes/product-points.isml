@@ -1,0 +1,40 @@
+<div style="width: 100%; max-width: inherit;" class="extra-info">
+    <div class="antavo-points" data-product-id="${pdict.product.id}"></div>
+</div>
+
+<isscript>
+	var productHelper = require("int_antavo_sfra/cartridge/scripts/Product");
+	var categories = productHelper.getProductCategoryNames(pdict.product);
+	var price = productHelper.getProductPrice(pdict.product);
+	var url = productHelper.getProductUrl(pdict.product.id);
+</isscript>
+
+<script>
+	document.addEventListener("antavo-brand-updated", function () {
+	    Antavo.IncentivizedPurchase.init();
+        Antavo.Campaigns.init();
+
+        Antavo.Campaigns.calculateCampaignBonus(
+            {
+                total: ${price},
+                transaction_id: "fake_transaction",
+                items: [{
+                    product_id: "${pdict.product.id}",
+                    product_name: "${pdict.product.productName}",
+                    product_url: "${url}",
+                    quantity: 1,
+                    subtotal: ${price},
+                    sku: "${pdict.product.manufacturerSKU || ""}",
+                    product_category: "${categories.join(",")}",
+                }],
+            },
+            function (messages) {
+                document
+                    .querySelectorAll('div[class="antavo-points"][data-product-id="${pdict.product.id}"]')
+                    .forEach(function (container) {
+                        container.innerHTML = messages.future;
+                    });
+            }
+        );
+	});
+</script>

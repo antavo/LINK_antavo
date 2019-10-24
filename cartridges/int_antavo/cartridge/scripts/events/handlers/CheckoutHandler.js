@@ -1,12 +1,15 @@
 /**
  * This handler object will be emitted automatically right after a checkout place.
+ * 
+ * @module int_antavo/scripts/events/handlers
  */
 
+"use strict"
+
 var Client = require("~/cartridge/scripts/Client");
-var Exception = require('~/cartridge/scripts/client/Exception');
+var Exception = require('~/cartridge/scripts/Exception');
 var Logger = require("dw/system/Logger");
 var URLUtils = require("dw/web/URLUtils");
-var template = require("bm_antavo/cartridge/scripts/utils/Template");
 
 exports.Handler = function () {
     /**
@@ -41,7 +44,7 @@ exports.Handler = function () {
         return {
             product_id: lineItem.productID,
             product_name: lineItem.productName,
-            product_url: URLUtils.https('Product-Show', 'pid', lineItem.productID).toString(),
+            product_url: URLUtils.https("Product-Show", "pid", lineItem.productID).toString(),
             price: subtotal / quantity,
             discount: discount,
             subtotal: adjustedSubtotal,
@@ -64,8 +67,13 @@ exports.Handler = function () {
                 ); 
             }
 
-            var order = data.order,
-                lineItems = order.getAllProductLineItems(),
+            var order = data.order;
+            
+            if (!order.customer.profile.custom["loyaltyOptIn"]) {
+                return;
+            }
+            
+            var lineItems = order.getAllProductLineItems(),
                 request = this.createDefaultCheckoutData(order);
             
             for (var i in lineItems) {

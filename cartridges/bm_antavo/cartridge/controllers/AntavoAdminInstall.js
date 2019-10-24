@@ -5,10 +5,10 @@
 "use strict"
 
 var CustomObjectMgr = require("dw/object/CustomObjectMgr");
-var Config = require("~/cartridge/scripts/utils/Config");
+var Config = require("int_antavo/cartridge/scripts/Config");
 var URLUtils = require('dw/web/URLUtils');
 var ServiceRegistry = require("dw/svc/LocalServiceRegistry");
-var Template = require("~/cartridge/scripts/utils/Template");
+var Template = require("int_antavo/cartridge/scripts/Template");
 
 /**
  * @param {String} name

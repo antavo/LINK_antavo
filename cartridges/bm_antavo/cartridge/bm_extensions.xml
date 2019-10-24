@@ -8,17 +8,19 @@
 			Antavo Loyalty
 		</name>
 		<short_description xml:lang="x-default">
-			TODO
+			Manage loyalty settings.
 		</short_description>
 		<description xml:lang="x-default">
-			TODO
+			Manage the settings related to your Antavo Loyalty Program.
 		</description>
 		<exec pipeline="AntavoAdminSdk" node="Settings" />
 		<sub-pipelines>
 			<pipeline name="AntavoAdminSdk-Settings" />
 			<pipeline name="AntavoAdminSdk-ProcessSettings" />
+			
 			<pipeline name="AntavoAdminMicrosite-Settings" />
 			<pipeline name="AntavoAdminMicrosite-ProcessSettings" />
+			
 			<pipeline name="AntavoAdminSocialShare-Settings" />
 			<pipeline name="AntavoAdminSocialShare-ProcessSettings" />
 			

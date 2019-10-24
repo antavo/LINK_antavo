@@ -2,6 +2,8 @@
  * FlashMessage helper for sending back handy success/error messages to the user. 
  */
 
+"use strict"
+
 /**
  * Clears the messages container
  */

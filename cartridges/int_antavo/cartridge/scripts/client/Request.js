@@ -1,31 +1,35 @@
 /**
  * Utility request helper for the Antavo client.
+ * 
+ * @module int_antavo/scripts/client
  */
+
+"use strict"
 
 /**
  * @var {String}
  */
-const _METHOD_GET = 'GET';
+const _METHOD_GET = "GET";
 
 /**
  * @var {String}
  */
-const _METHOD_POST = 'POST';
+const _METHOD_POST = "POST";
 
 /**
  * @var {String}
  */
-const _METHOD_PUT = 'PUT';
+const _METHOD_PUT = "PUT";
 
 /**
  * @var {String}
  */
-const _METHOD_DELETE = 'DELETE';
+const _METHOD_DELETE = "DELETE";
 
 /**
  * @var {String}
  */
-const _METHOD_PATCH = 'PATCH';
+const _METHOD_PATCH = "PATCH";
 
 /**
  * Determines if the given HTTP method can receive request body.
@@ -54,10 +58,10 @@ function prepareUrl(url, params) {
     // Creating the query string 
     var query = Object.keys(params).map(function (k) {
         return encodeURIComponent(k) + "=" + encodeURIComponent(params[k]);
-    }).join('&');
+    }).join("&");
 	
     // Appending the created query string, then return
-    return url + (url.indexOf('?') === -1 ? '?' : '&') + query;
+    return url + (url.indexOf("?") === -1 ? "?" : "&") + query;
 }
 
 exports.METHOD_GET = _METHOD_GET;

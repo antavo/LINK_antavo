@@ -1,0 +1,27 @@
+<isif condition="${customer.authenticated && customer.registered && !customer.profile.custom['loyaltyOptIn']}">
+	<div class="card">
+	    <div class="card-header clearfix">
+	        <h2 class="pull-left">
+	        	${Resource.msg('profile.opt_in_header', 'loyalty', null)}
+	       	</h2>
+	    </div>
+	    
+	    <div class="card-body card-info-group">
+	        <p>
+	        	${Resource.msg('profile.opt_in_text', 'loyalty', null)}
+	       	</p>
+	       	<a target="_blank" href="${URLUtils.url('Page-Show', 'cid', 'terms')}">
+				${Resource.msg('profile.opt_in_terms_text', 'loyalty', null)}
+			</a>
+	    </div>
+	    
+	    <div class="card-footer card-footer-border text-center">
+	    	<form method="post" action="${URLUtils.url('LoyaltyMicrosite-OptIn')}" id="loyalty-opt-in">
+	    		<input type="hidden" name="redirect" value="${URLUtils.url('LoyaltyMicrosite-Show')}">
+			    <button type="submit" class="btn btn-outline-primary">
+				    ${Resource.msg('profile.opt_in_button', 'loyalty', null)}
+				</button>
+			</form>
+	    </div>
+	</div>
+</isif>

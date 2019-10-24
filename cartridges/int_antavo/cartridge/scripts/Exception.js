@@ -1,6 +1,10 @@
 /**
  * Class to cast Antavo API error message and code to Javascript exception object.
+ * 
+ * @module int_antavo/scripts
  */
+
+"use strict"
 
 /**
  * @param {String} message  The error message from the API response.
